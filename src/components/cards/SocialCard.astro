@@ -1,4 +1,4 @@
-﻿---
+---
 import social from "@/collections/social.json";
 const { displaySocialIds } = Astro.props;
 
@@ -13,20 +13,20 @@ const filteredSocial = displaySocialIds.length > 0
       <div class="social-item-outer" style={`--i: ${index}; --t: ${filteredSocial.length};`}>
         {item.name === "WeChat" ? (
           <>
-            <button class="social-item qr-trigger" data-popup="wechat-qr-popup" data-copy="SJ664487637" data-label="微信号">
+            <button class="social-item qr-trigger" data-popup="wechat-qr-popup" data-copy="SJ664487637" data-label="΢�ź�">
               <img src={item.image} alt={item.name} class="social-image" />
             </button>
             <div id="wechat-qr-popup" class="qr-card" popover>
-              <img src="/portfolio/assets/social/wechat-qr.png" alt="微信二维码" class="qr-img" />
+              <img src="/assets/social/wechat-qr.png" alt="微信二维码" class="qr-img" />
             </div>
           </>
-        ) : item.name === "抖音" ? (
+        ) : item.name === "����" ? (
           <>
-            <button class="social-item qr-trigger" data-popup="douyin-qr-popup" data-copy="96105575" data-label="抖音ID">
+            <button class="social-item qr-trigger" data-popup="douyin-qr-popup" data-copy="96105575" data-label="����ID">
               <img src={item.image} alt={item.name} class="social-image" />
             </button>
             <div id="douyin-qr-popup" class="qr-card" popover>
-              <img src="/portfolio/assets/social/douyin-qr.png" alt="抖音二维码" class="qr-img" />
+              <img src="/assets/social/douyin-qr.png" alt="抖音二维码" class="qr-img" />
             </div>
           </>
         ) : (
@@ -155,7 +155,7 @@ const filteredSocial = displaySocialIds.length > 0
         }
         const toast = document.getElementById('copy-toast');
         if (toast) {
-          toast.textContent = '已复制' + label + ' ' + copyId;
+          toast.textContent = '�Ѹ���' + label + ' ' + copyId;
           toast.classList.add('show');
           setTimeout(() => toast.classList.remove('show'), 2000);
         }
