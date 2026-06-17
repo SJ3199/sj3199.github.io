@@ -2,16 +2,16 @@
 	{
 		"nameZh": "视觉作品",
 		"nameEn": "Visual Works",
-		"url": "/"
+		"url": "/portfolio/"
 	},
 	{
 		"nameZh": "个人介绍",
 		"nameEn": "Introduction",
-		"url": "/intro"
+		"url": "/portfolio/intro"
 	},
 	{
 		"nameZh": "AI项目",
 		"nameEn": "AI Projects",
-		"url": "/about"
+		"url": "/portfolio/about"
 	}
 ]
