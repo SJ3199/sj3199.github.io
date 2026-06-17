@@ -1,4 +1,4 @@
----
+﻿---
 import social from "@/collections/social.json";
 const { displaySocialIds } = Astro.props;
 
@@ -17,7 +17,7 @@ const filteredSocial = displaySocialIds.length > 0
               <img src={item.image} alt={item.name} class="social-image" />
             </button>
             <div id="wechat-qr-popup" class="qr-card" popover>
-              <img src="/assets/social/wechat-qr.png" alt="微信二维码" class="qr-img" />
+              <img src="/portfolio/assets/social/wechat-qr.png" alt="微信二维码" class="qr-img" />
             </div>
           </>
         ) : item.name === "抖音" ? (
@@ -26,7 +26,7 @@ const filteredSocial = displaySocialIds.length > 0
               <img src={item.image} alt={item.name} class="social-image" />
             </button>
             <div id="douyin-qr-popup" class="qr-card" popover>
-              <img src="/assets/social/douyin-qr.png" alt="抖音二维码" class="qr-img" />
+              <img src="/portfolio/assets/social/douyin-qr.png" alt="抖音二维码" class="qr-img" />
             </div>
           </>
         ) : (

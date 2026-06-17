@@ -1,11 +1,11 @@
-const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'http://localhost:5200';
+﻿const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'http://localhost:5200';
 
 export const siteConfig = {
 	title: "Portfolio",
 	author: "Designer",
 	url: SITE_URL,
 	mail: "hello@example.com",
-	resume: "/images/resume/",
+	resume: "/portfolio/images/resume/",
 	utm: {
 		source: `${SITE_URL}`,
 		medium: "referral",

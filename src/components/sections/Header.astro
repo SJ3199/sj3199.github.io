@@ -1,4 +1,4 @@
----
+﻿---
 import { Mail, Moon, SunMedium,Download } from "@lucide/astro";
 import menus from "@/collections/menu.json";
 import Button from "@/components/ui/Button.astro";
@@ -100,7 +100,7 @@ import Logo from "@/components/ui/Logo.astro";
 
         <!-- Contact Button (Mobile) -->
         <div class="relative z-10 w-full px-5 mt-3 hidden">
-          <Button url="/assets/resume.pdf" type="fill" className="m-auto w-full justify-center " download>
+          <Button url="/portfolio/assets/resume.pdf" type="fill" className="m-auto w-full justify-center " download>
             <span data-i18n="resume">简�?/span> <Download size={16} />
           </Button>
         </div>
@@ -110,7 +110,7 @@ import Logo from "@/components/ui/Logo.astro";
       <div class="relative flex items-center gap-0.5 ml-0.5 sm:gap-2 sm:ml-4 lg:ml-6">
         <!-- Contact Button (Desktop) -->
         <a
-          href="/assets/resume.pdf"
+          href="/portfolio/assets/resume.pdf"
           download
           target="_self"
           class="flex justify-center items-center gap-0.5 sm:gap-1 px-1.5 sm:px-5 py-0.5 sm:py-[12px] rounded-lg sm:rounded-xl bg-btn-primary dark:bg-btn-primary-dark border-[0] border-[rgba(138,127,255,0.2)] shadow-[0px_2px_3px_0_rgba(0,0,0,0.1)] max-w-60 transition duration-400 ease-in-out hover:bg-btn-primary-hover dark:hover:bg-btn-primary-dark-hover hover:translate-y-[-2px] hover:shadow-[0px_6px_9px_0_rgba(61,99,171,0.15)] dark:shadow-[0px_6px_9px_0_rgba(0,0,0,0.2)] md:flex mx-0 sm:mx-1"
