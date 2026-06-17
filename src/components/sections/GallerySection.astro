@@ -26,19 +26,18 @@ let globalIndex = 0;
 const itemGlobalIndex: Map<any, number> = new Map();
 for (const item of galleryItems) { itemGlobalIndex.set(item, globalIndex++); }
 
-// --- Preload image list (first 3 images per category + all posters images) ---
+// Preload first 12 images per category so all 3-column rows load fast
 const preloadImages: string[] = [];
 for (const cat of categories) {
   const items = itemsByCategory[cat] || [];
-  for (let i = 0; i < Math.min(6, items.length); i++) {
+  for (let i = 0; i < Math.min(12, items.length); i++) {
     preloadImages.push(items[i].image);
   }
 }
-// Deduplicate (shouldn't happen but just in case)
 const uniquePreload = [...new Set(preloadImages)];
 ---
 
-<!-- Preload critical images so columns 2/3 images load fast -->
+<!-- Preload first 12 images per category so all visible rows load instantly -->
 {uniquePreload.map((src) => (
   <link rel="preload" as="image" href={src} />
 ))}
@@ -69,27 +68,32 @@ const uniquePreload = [...new Set(preloadImages)];
         const items = itemsByCategory[cat] || [];
         return (
           <div class="gallery-category" data-cat={cat} id={`cat-${cat}`}>
-            <div class="gallery-masonry" data-items={items.length}>
-              {items.map((item) => (
+            <div class="gallery-grid">
+              {items.map((item, idx) => {
+                const imgSrc = item.image;
+                // First 3 images per category get eager loading + high priority
+                const isPrioritized = idx < 3;
+                return (
                 <article
                   class="gallery-item group cursor-pointer"
                   data-category={cat}
                   data-global={itemGlobalIndex.get(item)}
                 >
-                  <div class={`relative overflow-hidden rounded-2xl gallery-img-wrap${item.image.endsWith('.png') ? '' : ' border border-primary/10 dark:border-primary/20 bg-neutral-100 dark:bg-neutral-800'}`}>
+                  <div class={`relative overflow-hidden rounded-2xl gallery-img-wrap${imgSrc.endsWith('.png') ? '' : ' border border-primary/10 dark:border-primary/20 bg-neutral-100 dark:bg-neutral-800'}`}>
                     <img
-                      src={item.image}
+                      src={imgSrc}
                       alt={item.title}
                       class="w-full h-auto block"
                       width="600"
                       height="400"
-                      decoding="async"
-                      fetchpriority="auto"
-                      onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<div class=\'flex items-center justify-center bg-neutral-100 dark:bg-neutral-800\' style=\'min-height:200px\'><span class=\'text-neutral-400 text-sm\'>图片加载失败</span></div>')"
+                      loading={isPrioritized ? "eager" : "lazy"}
+                      decoding={isPrioritized ? "sync" : "async"}
+                      fetchpriority={isPrioritized ? "high" : "auto"}
                     />
                   </div>
                 </article>
-              ))}
+                );
+              })}
             </div>
           </div>
         );
@@ -102,19 +106,22 @@ const uniquePreload = [...new Set(preloadImages)];
             <div class="brand-main w-full md:w-1/2 flex-shrink-0">
               <article class="gallery-item group cursor-pointer" data-category="brand-design" data-global={itemGlobalIndex.get(itemsByCategory['brand-design'][0])}>
                 <div class={`relative overflow-hidden rounded-2xl gallery-img-wrap${itemsByCategory['brand-design'][0].image.endsWith('.png') ? '' : ' border border-primary/10 dark:border-primary/20 bg-neutral-100 dark:bg-neutral-800'}`}>
-                  <img src={itemsByCategory['brand-design'][0].image} alt={itemsByCategory['brand-design'][0].title} class="w-full h-auto block" width="720" height="480" decoding="async" fetchpriority="auto" />
+                  <img src={itemsByCategory['brand-design'][0].image} alt={itemsByCategory['brand-design'][0].title} class="w-full h-auto block" width="720" height="480" loading="eager" decoding="sync" fetchpriority="high" />
                 </div>
               </article>
             </div>
             {itemsByCategory['brand-design'].length > 1 && (
               <div class="brand-rest flex-1 grid grid-cols-2 gap-4 md:gap-6 content-start">
-                {itemsByCategory['brand-design'].slice(1).map((item) => (
+                {itemsByCategory['brand-design'].slice(1).map((item, idx) => {
+                  const isPrioritized = idx < 2;
+                  return (
                   <article class="gallery-item group cursor-pointer" data-category="brand-design" data-global={itemGlobalIndex.get(item)}>
                     <div class={`relative overflow-hidden rounded-2xl gallery-img-wrap${item.image.endsWith('.png') ? '' : ' border border-primary/10 dark:border-primary/20 bg-neutral-100 dark:bg-neutral-800'}`}>
-                      <img src={item.image} alt={item.title} class="w-full h-auto block" width="480" height="360" decoding="async" fetchpriority="auto" />
+                      <img src={item.image} alt={item.title} class="w-full h-auto block" width="480" height="360" loading={isPrioritized ? "eager" : "lazy"} decoding={isPrioritized ? "sync" : "async"} fetchpriority={isPrioritized ? "high" : "auto"} />
                     </div>
                   </article>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
@@ -180,30 +187,26 @@ const uniquePreload = [...new Set(preloadImages)];
   html.dark .filter-tag:hover { background-color: rgba(243, 244, 247, 0.08); }
   html.dark .filter-tag.active { background: #f4f3f0; color: #19191b; font-weight: 500; }
 
-  /* Per-category container: all in DOM, only active one visible */
   .gallery-category { display: none; }
   .gallery-category.active { display: block; }
 
-  /* CSS columns waterfall — items fill top→bottom, left→right */
-  .gallery-masonry {
-    column-count: 1;
-    column-gap: 1rem;
+  /* CSS Grid: guaranteed left→right, top→bottom ordering at every breakpoint */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
   @media (min-width: 640px) {
-    .gallery-masonry { column-count: 2; column-gap: 1.5rem; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
   }
   @media (min-width: 1024px) {
-    .gallery-masonry { column-count: 3; column-gap: 1.5rem; }
+    .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   }
 
-  /* Break-inside to prevent items splitting across columns */
   .gallery-item {
-    break-inside: avoid;
-    margin-bottom: 1rem;
     animation: fadeInUp 0.5s ease forwards;
     animation-fill-mode: backwards;
   }
-  @media (min-width: 640px) { .gallery-item { margin-bottom: 1.5rem; } }
 
   .gallery-img-wrap { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 
@@ -230,55 +233,12 @@ const uniquePreload = [...new Set(preloadImages)];
   const galleryData = JSON.parse(document.getElementById('galleryDataStore').getAttribute('data-json'));
   let currentDetailIndex = -1;
   let currentFilter = document.querySelector('.filter-tag.active')?.dataset.filter || 'live-stream';
-  let currentCols = 0;
-
-  function reorderForColumns(items, cols) {
-    const N = items.length;
-    if (N === 0) return items;
-    const baseRows = Math.floor(N / cols);
-    const extra = N % cols;
-    const colStarts = [0];
-    for (let c = 0; c < cols - 1; c++) {
-      colStarts.push(colStarts[c] + (c < extra ? baseRows + 1 : baseRows));
-    }
-    const indexed = items.map(function(item, i) {
-      var col = i % cols;
-      var row = Math.floor(i / cols);
-      var visPos = colStarts[col] + row;
-      return { item: item, visPos: visPos };
-    });
-    indexed.sort(function(a, b) { return a.visPos - b.visPos; });
-    return indexed.map(function(x) { return x.item; });
-  }
-
-  var naturalOrder = new Map();
-
-  function getColumnCount() {
-    return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
-  }
-
-  function applyColumnOrder(cols) {
-    document.querySelectorAll('.gallery-masonry').forEach(function(container) {
-      var items = Array.from(container.children);
-      if (cols > 1) {
-        reorderForColumns(items, cols).forEach(function(el) { container.appendChild(el); });
-      } else {
-        var natural = naturalOrder.get(container);
-        if (natural) natural.forEach(function(el) { container.appendChild(el); });
-      }
-    });
-  }
 
   document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.gallery-masonry').forEach(function(container) {
-      naturalOrder.set(container, Array.from(container.children));
-      Array.from(container.children).forEach(function(el, i) {
-        el.style.animationDelay = (i % 20) * 0.03 + 's';
-      });
+    // Staggered entrance animation
+    document.querySelectorAll('.gallery-grid .gallery-item').forEach(function(el, i) {
+      el.style.animationDelay = (i % 20) * 0.03 + 's';
     });
-
-    currentCols = getColumnCount();
-    applyColumnOrder(currentCols);
 
     var filterBtns = document.querySelectorAll('.filter-tag');
     var initialCat = document.getElementById('cat-' + currentFilter);
@@ -329,18 +289,6 @@ const uniquePreload = [...new Set(preloadImages)];
       if (e.key === 'ArrowLeft') navigateDetail(-1);
       if (e.key === 'ArrowRight') navigateDetail(1);
     });
-  });
-
-  var resizeTimer;
-  window.addEventListener('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() {
-      var newCols = getColumnCount();
-      if (newCols !== currentCols) {
-        currentCols = newCols;
-        applyColumnOrder(currentCols);
-      }
-    }, 200);
   });
 
   function openDetail(index) {
