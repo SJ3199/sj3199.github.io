@@ -1,4 +1,4 @@
-ï»¿---
+---
 ---
 
 <div class="matter-wrapper">
@@ -79,20 +79,20 @@ import Matter from "matter-js";
 
     // Icon paths (adjust as needed)
     const iconUrls = [
-      "/portfolio/assets/stack/astro.png",
-      "/portfolio/assets/stack/css.png",
-      "/portfolio/assets/stack/github.png",
-      "/portfolio/assets/stack/html.png",
-      "/portfolio/assets/stack/bootstrap.png",
-      "/portfolio/assets/stack/cloudflare.png",
-      "/portfolio/assets/stack/js.png",
-      "/portfolio/assets/stack/netlify.png",
-      "/portfolio/assets/stack/nextjs.png",
-      "/portfolio/assets/stack/nodejs.png",
-      "/portfolio/assets/stack/npm.png",
-      "/portfolio/assets/stack/tailwind.png",
-      "/portfolio/assets/stack/vercel.png",
-      "/portfolio/assets/stack/vscode.png",
+      "/assets/stack/astro.png",
+      "/assets/stack/css.png",
+      "/assets/stack/github.png",
+      "/assets/stack/html.png",
+      "/assets/stack/bootstrap.png",
+      "/assets/stack/cloudflare.png",
+      "/assets/stack/js.png",
+      "/assets/stack/netlify.png",
+      "/assets/stack/nextjs.png",
+      "/assets/stack/nodejs.png",
+      "/assets/stack/npm.png",
+      "/assets/stack/tailwind.png",
+      "/assets/stack/vercel.png",
+      "/assets/stack/vscode.png",
     ];
 
     // Preload images to obtain naturalWidth/Height
@@ -117,7 +117,7 @@ import Matter from "matter-js";
     // Sizing strategy: significantly increase target area range (adapted for 720x480)
     function computeAreaRange() {
       // Use container area as the base; increase icon area proportion
-      // 720*480 â‰ˆ 345600; here a single icon area is roughly between 1/20 ~ 1/10 of the container area
+      // 720*480 ¡Ö 345600; here a single icon area is roughly between 1/20 ~ 1/10 of the container area
       const baseArea = W * H;
       const areaMin = clamp(baseArea / 20, 12000, 30000);
       const areaMax = clamp(baseArea / 10, 20000, 50000);

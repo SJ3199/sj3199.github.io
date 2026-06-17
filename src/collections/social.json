@@ -1,23 +1,23 @@
 [
-	{
-		"id": 9,
-		"name": "WeChat",
-		"username": "sam",
-		"image": "/assets/social/social-wechat.png",
-		"url": "#wechat"
-	},
-	{
-		"id": 2,
-		"name": "¶¶Òô",
-		"username": "sam",
-		"image": "/assets/social/social-douyin.png",
-		"url": "#douyin"
-	},
-	{
-		"id": 12,
-		"name": "Facebook",
-		"isShow": false,
-		"image": "/assets/social/social-facebook.png",
-		"url": "#facebook"
-	}
+  {
+    "id": 9,
+    "name": "WeChat",
+    "username": "sam",
+    "image": "/assets/social/social-wechat.png",
+    "url": "#wechat"
+  },
+  {
+    "id": 2,
+    "name": "æŠ–éŸ³",
+    "username": "sam",
+    "image": "/assets/social/social-douyin.png",
+    "url": "#douyin"
+  },
+  {
+    "id": 12,
+    "name": "Facebook",
+    "isShow": false,
+    "image": "/assets/social/social-facebook.png",
+    "url": "#facebook"
+  }
 ]
