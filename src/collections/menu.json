@@ -1,17 +1,23 @@
 [
 	{
 		"nameZh": "视觉作品",
+		"nameZhShort": "作品",
 		"nameEn": "Visual Works",
+		"nameEnShort": "Works",
 		"url": "/"
 	},
 	{
 		"nameZh": "个人介绍",
+		"nameZhShort": "简介",
 		"nameEn": "Introduction",
+		"nameEnShort": "Intro",
 		"url": "/intro"
 	},
 	{
 		"nameZh": "AI项目",
+		"nameZhShort": "AI",
 		"nameEn": "AI Projects",
+		"nameEnShort": "AI",
 		"url": "/about"
 	}
 ]

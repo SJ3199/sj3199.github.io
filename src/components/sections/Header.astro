@@ -93,7 +93,6 @@ const menusWithActive = menus.map(menu => ({
         </div>
 
         <!-- Menu Links -->
-        <!-- DEBUG: currentPath={currentPath} -->
         <div class="relative z-10 flex flex-row sm:flex-row items-center w-auto gap-1 sm:gap-0">
           {
             menusWithActive.map((menu) => {
@@ -103,6 +102,8 @@ const menusWithActive = menus.map(menu => ({
                   data-i18n-menu
                   data-i18n-zh={menu.nameZh}
                   data-i18n-en={menu.nameEn}
+                  data-i18n-zh-short={menu.nameZhShort}
+                  data-i18n-en-short={menu.nameEnShort}
                   class={`relative flex items-center justify-center w-auto px-1 py-0.5 sm:px-4 sm:py-2 md:px-5 font-medium tracking-wide text-center duration-200 ease-out rounded-lg sm:rounded-none text-neutral-700 dark:text-neutral-200 text-[11px] sm:text-[15px] hover:text-primary sm:hover:bg-transparent dark:hover:text-white dark:hover:bg-neutral-800/50 sm:dark:hover:bg-transparent active:scale-[0.98] sm:active:scale-100 transition-all${menu.active ? ' active text-primary dark:text-primary-light' : ''}`}
                 >
                   {menu.nameZh}
