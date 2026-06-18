@@ -152,10 +152,24 @@ function applyLang(lang) {
     if (t[key]) el.textContent = t[key];
   });
 
+  function updateMenuText() {
+    var isMobile = window.innerWidth < 640;
+    document.querySelectorAll('[data-i18n-menu]').forEach(function(el) {
+      var zh = isMobile ? (el.getAttribute('data-i18n-zh-short') || el.getAttribute('data-i18n-zh')) : el.getAttribute('data-i18n-zh');
+      var en = isMobile ? (el.getAttribute('data-i18n-en-short') || el.getAttribute('data-i18n-en')) : el.getAttribute('data-i18n-en');
+      if (zh && en) el.textContent = lang === 'en' ? en : zh;
+    });
+  }
+
   document.querySelectorAll('[data-i18n-menu]').forEach(function(el) {
-    const zh = el.getAttribute('data-i18n-zh');
-    const en = el.getAttribute('data-i18n-en');
-    if (zh && en) el.textContent = lang === 'en' ? en : zh;
+    updateMenuText();
+  });
+
+  // Update menu text on resize
+  var menuResizeHandler = null;
+  window.addEventListener('resize', function() {
+    if (menuResizeHandler) clearTimeout(menuResizeHandler);
+    menuResizeHandler = setTimeout(updateMenuText, 100);
   });
 
   document.querySelectorAll('[data-i18n-cat]').forEach(function(el) {
