@@ -9,7 +9,6 @@ const i18n = {
     'hero-desc-2': '擅长将品牌理念转化为视觉语言，打造有吸引力的电商视觉体验。',
     'gallery-title': '作品集 ↓',
     'gallery-desc': '以下是我的设计作品展示，点击进入详情。',
-    'gallery-desc-no-click': '以下是我的设计作品展示。',
     'gallery-empty': '该分类暂无作品',
     'cat-live-stream': '直播画面',
     'cat-posters': '海报设计',
@@ -20,8 +19,10 @@ const i18n = {
     'cat-douyin-store': '抖音店铺',
     'cat-douyin-products': '抖音产品图',
     'footer-copyright': '© 2026 MajorSam | 网站设计框架 inspired by ',
-    'footer-by': '网站设计框架',
-    'social-douyin': '抖音',
+    'footer-by': '网站设计框架 inspired by',
+    'about-title': '正在更新...',
+    'about-desc': 'AI 项目页面正在建设中，敬请期待',
+    'social-xiaohongshu': '小红书',
     'social-wechat': '微信',
     'social-github': 'GitHub',
     'intro-title': '关于我 ↓',
@@ -72,7 +73,6 @@ const i18n = {
     'hero-desc-2': 'Skilled at transforming brand concepts into visual language, creating compelling e-commerce visual experiences.',
     'gallery-title': 'Portfolio ↓',
     'gallery-desc': 'Here are my design works. Click to view details.',
-    'gallery-desc-no-click': 'Here are my design works.',
     'gallery-empty': 'No works in this category yet',
     'cat-live-stream': 'Livestream',
     'cat-posters': 'Posters',
@@ -83,8 +83,10 @@ const i18n = {
     'cat-douyin-store': 'TikTok Store',
     'cat-douyin-products': 'TikTok Product',
     'footer-copyright': '© 2026 MajorSam | Design framework inspired by ',
-    'footer-by': 'Design Framework',
-    'social-douyin': 'Douyin',
+    'footer-by': 'Design framework inspired by',
+    'about-title': 'Under Construction...',
+    'about-desc': 'AI Projects page is currently under development. Stay tuned!',
+    'social-xiaohongshu': 'Xiaohongshu',
     'social-wechat': 'WeChat',
     'social-github': 'GitHub',
     'intro-title': 'About Me ↓',
@@ -150,10 +152,24 @@ function applyLang(lang) {
     if (t[key]) el.textContent = t[key];
   });
 
+  function updateMenuText() {
+    var isMobile = window.innerWidth < 640;
+    document.querySelectorAll('[data-i18n-menu]').forEach(function(el) {
+      var zh = isMobile ? (el.getAttribute('data-i18n-zh-short') || el.getAttribute('data-i18n-zh')) : el.getAttribute('data-i18n-zh');
+      var en = isMobile ? (el.getAttribute('data-i18n-en-short') || el.getAttribute('data-i18n-en')) : el.getAttribute('data-i18n-en');
+      if (zh && en) el.textContent = lang === 'en' ? en : zh;
+    });
+  }
+
   document.querySelectorAll('[data-i18n-menu]').forEach(function(el) {
-    const zh = el.getAttribute('data-i18n-zh');
-    const en = el.getAttribute('data-i18n-en');
-    if (zh && en) el.textContent = lang === 'en' ? en : zh;
+    updateMenuText();
+  });
+
+  // Update menu text on resize
+  var menuResizeHandler = null;
+  window.addEventListener('resize', function() {
+    if (menuResizeHandler) clearTimeout(menuResizeHandler);
+    menuResizeHandler = setTimeout(updateMenuText, 100);
   });
 
   document.querySelectorAll('[data-i18n-cat]').forEach(function(el) {
