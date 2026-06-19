@@ -39,3 +39,6 @@ Thumbs.db
 
 # Dev tools & scripts
 tools/
+
+# wrangler state
+.wrangler/
