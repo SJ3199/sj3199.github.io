@@ -65,7 +65,7 @@ const i18n = {
     'exp2-hl6': '具备成熟团队管理经验，搭建标准化流程，推动团队设计能力提升。拥有成熟商业设计思维与行业洞察力，深耕电商视觉，精准把握市场与用户心理',
     // --- AI Tools ---
     'tool-page-title': '辅助创建的工具',
-    'tool-page-desc': '基于浏览器本地处理的AI工具集，无需上传到服务器，安全快速',
+    'tool-page-desc': '基于浏览器本地处理的工具集，无需上传到服务器，安全快速',
     'tool-card-compress-title': '图片压缩',
     'tool-card-compress-desc': '智能压缩引擎，自动优化图片体积。支持 JPG / PNG / WebP 格式',
     'tool-card-convert-title': '格式转换',
@@ -249,7 +249,7 @@ const i18n = {
     'exp2-hl6': 'Possessed mature team management experience, established standardized workflows to drive design capability improvement. Strong commercial design thinking and industry insight, deep expertise in e-commerce visuals, accurately capturing market trends and user psychology',
     // --- AI Tools ---
     'tool-page-title': 'Powered Tools',
-    'tool-page-desc': 'Browser-based AI toolkit, no server upload needed, safe and fast',
+    'tool-page-desc': 'Browser-based toolkit, no server upload needed, safe and fast',
     'tool-card-compress-title': 'Image Compress',
     'tool-card-compress-desc': 'Smart compression engine, automatically optimize image size. Supports JPG / PNG / WebP formats',
     'tool-card-convert-title': 'Format Convert',
