@@ -35,6 +35,12 @@ import '../styles/article-enhancements.css';
       keywords = {keywords}
     />
     <TrackGa />
+    <!-- Critical CSS: prevent SAM logo flash before Tailwind loads -->
+    <style>
+      .logo-dark{display:none!important}
+      html.dark .logo-dark{display:block!important}
+      html.dark .logo-light{display:none!important}
+    </style>
     <!-- Used to add dark mode right away, adding here prevents any flicker -->
     <!-- Default: dark mode. Only switch to light if explicitly set to 'false' -->
     <script is:inline>
