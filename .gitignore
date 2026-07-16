@@ -38,7 +38,7 @@ Thumbs.db
 .cache/
 
 # Dev tools & scripts
-tools/
+/tools/
 
 # wrangler state
 .wrangler/

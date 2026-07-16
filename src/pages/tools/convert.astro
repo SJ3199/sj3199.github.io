@@ -1,0 +1,563 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout
+  title="在线图片格式转换 | AI 项目 | Portfolio"
+  description="在线图片格式转换工具，支持 JPG / PNG / WebP / BMP 互转，选中目标格式一键转换，纯本地处理保护隐私。"
+  keywords="图片格式转换, PNG转JPG, WebP转JPG, JPG转PNG, 批量转换, 在线转换"
+>
+
+<div class="site-container mx-auto py-12 md:py-20">
+  <!-- Hero -->
+  <div class="relative z-20 mx-auto mb-12 text-center md:mb-16">
+    <h1 class="font-sans text-4xl font-bold tracking-normal text-neutral-900 dark:text-white sm:text-5xl">
+      <span data-i18n="convert-title-prefix">在线图片</span><span class="text-primary dark:text-primary-light" data-i18n="convert-title-highlight">格式转换</span>
+    </h1>
+    <p class="mx-auto mt-4 max-w-xl text-sm leading-7 text-neutral-700 dark:text-neutral-300 sm:mt-4 sm:text-base lg:text-lg" data-i18n="convert-hero-desc">
+      纯浏览器端处理，图片不会上传到任何服务器。
+      选中目标格式即可转换，支持 JPG / PNG / WebP / BMP 互转，批量拖拽一键下载。
+    </p>
+  </div>
+
+  <!-- Control Bar — Format buttons are the STAR -->
+  <div id="controlBar" class="mb-5 flex flex-wrap items-center gap-4 rounded-xl border border-neutral-200 bg-white/80 px-6 py-4 dark:border-neutral-700 dark:bg-neutral-900/80">
+    <!-- Format selection — PRIMARY, horizontal toggle buttons -->
+    <div class="flex items-center gap-3">
+      <span class="whitespace-nowrap text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="convert-label-target">🎯 转换为</span>
+      <div class="flex gap-2" id="formatBtns">
+        <button data-format="image/jpeg" class="fmt-btn active rounded-lg border-2 px-4 py-2 text-sm transition-all hover:shadow-md">JPG</button>
+        <button data-format="image/png" class="fmt-btn rounded-lg border-2 px-4 py-2 text-sm transition-all hover:shadow-md">PNG</button>
+        <button data-format="image/webp" class="fmt-btn rounded-lg border-2 px-4 py-2 text-sm transition-all hover:shadow-md">WebP</button>
+        <button data-format="image/bmp" class="fmt-btn rounded-lg border-2 px-4 py-2 text-sm transition-all hover:shadow-md">BMP</button>
+      </div>
+    </div>
+
+    <span class="hidden h-6 w-px bg-neutral-200 dark:bg-neutral-700 sm:block"></span>
+
+    <!-- Quality — secondary -->
+    <div class="flex items-center gap-2">
+      <span class="whitespace-nowrap text-xs font-medium text-neutral-500 dark:text-neutral-400" data-i18n="convert-label-quality">输出画质</span>
+      <input id="qualitySlider" type="range" min="10" max="100" value="100" class="h-1.5 w-28 accent-primary" />
+      <span id="qualityLabel" class="inline-flex min-w-[2.5rem] items-center justify-center rounded bg-primary/10 px-1.5 py-0.5 text-xs font-semibold text-primary dark:bg-primary/20 dark:text-primary-light">100%</span>
+    </div>
+
+    <!-- Actions — right side -->
+    <div class="ml-auto flex items-center gap-2">
+      <button id="convertBtn" class="rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary-strong hover:shadow-xl hover:shadow-primary/30 active:scale-95 dark:bg-primary-dark dark:shadow-primary/15 dark:hover:bg-primary" data-i18n="convert-btn-start">
+        开始转换
+      </button>
+      <button id="clearBtn" class="rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-sm font-medium text-neutral-500 transition-all hover:border-red-300 hover:text-red-500 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:border-red-600 dark:hover:text-red-400">
+        清空
+      </button>
+    </div>
+  </div>
+
+  <!-- Upload Zone -->
+  <div
+    id="dropZone"
+    class="flex w-full cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-neutral-300 bg-white/60 px-6 py-16 transition-all duration-300 hover:border-primary/50 hover:bg-primary/[0.02] dark:border-neutral-600 dark:bg-neutral-900/50 dark:hover:border-primary/40 dark:hover:bg-primary/[0.03] md:py-20"
+  >
+    <div class="mb-5 flex h-18 w-18 items-center justify-center rounded-2xl bg-primary/10 dark:bg-primary/20">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-primary dark:text-primary-light">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="17 8 12 3 7 8"/>
+        <line x1="12" y1="3" x2="12" y2="15"/>
+      </svg>
+    </div>
+    <p class="text-base font-medium text-neutral-700 dark:text-neutral-200 sm:text-lg">
+      <span data-i18n="convert-upload">拖拽图片到此处，或</span><span class="text-primary dark:text-primary-light" data-i18n="convert-upload-click">点击上传</span>
+    </p>
+    <p class="mt-2 text-xs text-neutral-400 dark:text-neutral-500 sm:text-sm" data-i18n="convert-upload-hint">
+      Ctrl+V 粘贴图片 ｜ 支持 JPG / PNG / WebP / BMP ｜ 一次最多 50 张
+    </p>
+    <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp,image/bmp" multiple class="hidden" />
+  </div>
+
+  <!-- Small Thumbnail Previews -->
+  <div id="previewArea" class="mx-auto mt-5 hidden max-w-4xl">
+    <div class="mb-3 flex items-center justify-between">
+      <span id="previewCount" class="text-sm font-medium text-neutral-600 dark:text-neutral-300"></span>
+      <button id="clearPreviewBtn" class="text-xs text-neutral-400 transition-colors hover:text-red-500 dark:text-neutral-500 dark:hover:text-red-400" data-i18n="tool-clear-all">清空全部</button>
+    </div>
+    <div id="previewGrid" class="flex flex-wrap gap-2"></div>
+  </div>
+
+  <!-- Progress -->
+  <div id="progressBar" class="mx-auto mt-5 hidden max-w-md">
+    <div class="overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-700">
+      <div id="progressFill" class="h-2 rounded-full bg-primary transition-all duration-300 dark:bg-primary-dark" style="width: 0%"></div>
+    </div>
+    <p id="progressText" class="mt-1 text-center text-xs text-neutral-400 dark:text-neutral-500" data-i18n="tool-progress-preparing">准备中...</p>
+  </div>
+
+  <!-- Results -->
+  <div id="results" class="mx-auto mt-8 hidden max-w-5xl">
+    <div id="summaryBar" class="mb-6 flex flex-wrap items-center gap-3 rounded-xl border border-green-200 bg-green-50/80 px-5 py-3 dark:border-green-800 dark:bg-green-950/50">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-green-600 dark:text-green-400"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <span id="summaryText" class="text-sm font-medium text-green-700 dark:text-green-300"></span>
+      <button id="downloadAllBtn" class="ml-auto rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-white transition-all hover:bg-primary-strong active:scale-95 dark:bg-primary-dark dark:hover:bg-primary" data-i18n="tool-download-all">
+        📦 批量下载
+      </button>
+    </div>
+    <div id="imageGrid" class="grid gap-3" style="grid-template-columns:repeat(auto-fill,minmax(220px,300px))"></div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4" onclick="this.classList.add('hidden')">
+    <button class="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-2xl text-white transition-colors hover:bg-white/40" onclick="document.getElementById('lightbox')!.classList.add('hidden')">&times;</button>
+    <img id="lightboxImg" src="" alt="预览" class="max-h-[90vh] max-w-full rounded-xl object-contain shadow-2xl" onclick="event.stopPropagation()" />
+  </div>
+
+  <!-- Features -->
+  <div class="mx-auto max-w-4xl mt-20">
+    <h2 class="mb-10 text-center font-sans text-3xl font-bold tracking-normal text-neutral-900 dark:text-white sm:text-4xl" data-i18n="convert-feature-title">
+      100% 免费 · 全格式互转
+    </h2>
+    <div class="grid gap-8 sm:grid-cols-2">
+      <div class="flex gap-4">
+        <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-2xl dark:bg-blue-950">🔄</div>
+        <div>
+          <h3 class="mb-1 text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="convert-feat1-title">多格式互转</h3>
+          <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400" data-i18n="convert-feat1-desc">支持 JPG、PNG、WebP、BMP 四种格式互相转换，一键批量完成。</p>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-green-50 text-2xl dark:bg-green-950">🎨</div>
+        <div>
+          <h3 class="mb-1 text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="convert-feat2-title">保持画质</h3>
+          <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400" data-i18n="convert-feat2-desc">可调节输出画质（最高 100%），确保转换后视觉效果几乎无损。</p>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-purple-50 text-2xl dark:bg-purple-950">📦</div>
+        <div>
+          <h3 class="mb-1 text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="convert-feat3-title">批量转换</h3>
+          <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400" data-i18n="convert-feat3-desc">支持拖拽多图、Ctrl+V 粘贴，一次转换最多 50 张图片。</p>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-2xl dark:bg-orange-950">🔒</div>
+        <div>
+          <h3 class="mb-1 text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="convert-feat4-title">隐私安全</h3>
+          <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400" data-i18n="convert-feat4-desc">纯浏览器端处理，图片不会离开你的设备，绝不上传服务器。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="mx-auto mt-16 max-w-2xl pb-16">
+    <h2 class="mb-8 text-center font-sans text-2xl font-bold text-neutral-900 dark:text-white sm:text-3xl" data-i18n="convert-faq-title">常见问题</h2>
+    <div class="space-y-6">
+      <div>
+        <h3 class="mb-1.5 text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="convert-faq1-q">可以将 PNG 透明图转为 JPG 吗？</h3>
+        <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400" data-i18n="convert-faq1-a">可以。转换时透明区域会自动填充为白色背景。如需保留透明通道，请选择 PNG 或 WebP 格式。</p>
+      </div>
+      <div>
+        <h3 class="mb-1.5 text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="convert-faq2-q">图片会被上传到服务器吗？</h3>
+        <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400" data-i18n="convert-faq2-a">不会。所有格式转换操作都在你的浏览器中通过 Canvas API 完成，图片数据从未离开你的设备。</p>
+      </div>
+      <div>
+        <h3 class="mb-1.5 text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="convert-faq3-q">转换后会损失画质吗？</h3>
+        <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400" data-i18n="convert-faq3-a">转换过程需要重新编码图片。使用高画质设置（85%+）可保持视觉效果几乎不变。WebP 格式在同等画质下体积更小。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</Layout>
+
+<style>
+  .fmt-btn {
+    border-color: #e5e7eb;
+    color: #4b5563;
+    font-weight: 500;
+    background: transparent;
+  }
+  .fmt-btn:hover {
+    border-color: var(--color-primary, #2d6dc3);
+    color: var(--color-primary, #2d6dc3);
+    opacity: 0.7;
+  }
+  .fmt-btn.active {
+    border-color: var(--color-primary, #2d6dc3) !important;
+    background: rgba(var(--color-primary-rgb, 45, 109, 195), 0.1);
+    color: var(--color-primary, #2d6dc3);
+    font-weight: 600;
+  }
+  :root.dark .fmt-btn {
+    border-color: #52525b;
+    color: #a1a1aa;
+  }
+  :root.dark .fmt-btn:hover {
+    border-color: var(--color-primary-light, #8fb9ff);
+    color: var(--color-primary-light, #8fb9ff);
+    opacity: 0.7;
+  }
+  :root.dark .fmt-btn.active {
+    border-color: var(--color-primary-light, #8fb9ff) !important;
+    background: rgba(143, 185, 255, 0.15);
+    color: var(--color-primary-light, #8fb9ff);
+  }
+</style>
+
+<script>
+  const state = {
+    files: [] as File[],
+    results: [] as { name: string; originalSize: number; compressedSize: number; originalUrl: string; compressedUrl: string; width: number; height: number }[],
+    converting: false,
+    targetFormat: 'image/jpeg' as string,
+  };
+
+  const dropZone = document.getElementById('dropZone')!;
+  const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+  const progressBar = document.getElementById('progressBar')!;
+  const progressFill = document.getElementById('progressFill')!;
+  const progressText = document.getElementById('progressText')!;
+  const results = document.getElementById('results')!;
+  const summaryBar = document.getElementById('summaryBar')!;
+  const summaryText = document.getElementById('summaryText')!;
+  const imageGrid = document.getElementById('imageGrid')!;
+  const convertBtn = document.getElementById('convertBtn')!;
+  const clearBtn = document.getElementById('clearBtn')!;
+  const downloadAllBtn = document.getElementById('downloadAllBtn')!;
+  const previewArea = document.getElementById('previewArea')!;
+  const previewGrid = document.getElementById('previewGrid')!;
+  const previewCount = document.getElementById('previewCount')!;
+  const clearPreviewBtn = document.getElementById('clearPreviewBtn')!;
+  const qualitySlider = document.getElementById('qualitySlider') as HTMLInputElement;
+  const qualityLabel = document.getElementById('qualityLabel')!;
+  const formatBtns = document.getElementById('formatBtns')!;
+
+  // Format button toggle
+  formatBtns.querySelectorAll('.fmt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      formatBtns.querySelectorAll('.fmt-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.targetFormat = (btn as HTMLElement).dataset.format!;
+    });
+  });
+
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-primary', 'bg-primary/[0.05]'); });
+  dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('border-primary', 'bg-primary/[0.05]'); });
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('border-primary', 'bg-primary/[0.05]');
+    if (e.dataTransfer?.files) addFiles(e.dataTransfer.files);
+  });
+  fileInput.addEventListener('change', () => { if (fileInput.files) addFiles(fileInput.files); });
+  document.addEventListener('paste', (e) => {
+    if (e.clipboardData?.files.length) { e.preventDefault(); addFiles(e.clipboardData.files); }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { const lb = document.getElementById('lightbox')!; lb.classList.add('hidden'); lb.classList.remove('flex'); }
+  });
+  qualitySlider.addEventListener('input', () => { qualityLabel.textContent = qualitySlider.value + '%'; });
+  convertBtn.addEventListener('click', () => convertAll());
+  clearBtn.addEventListener('click', () => resetAll());
+  clearPreviewBtn.addEventListener('click', () => resetAll());
+
+  // --- i18n helpers ---
+  function __t(key, vars) {
+    var lang = localStorage.getItem('lang') || 'zh';
+    try {
+      var t = i18n[lang] || i18n.zh;
+      var s = t[key] || key;
+      if (vars) { Object.keys(vars).forEach(function(k) { s = s.split('{'+k+'}').join(vars[k]); }); }
+      return s;
+    } catch(e) { return key; }
+  }
+
+  function updatePreviewCount() {
+    if (state.files.length > 0) {
+      previewCount.textContent = __t('convert-preview-selected', { n: String(state.files.length) });
+    }
+  }
+  window.addEventListener('langchange', function() { updatePreviewCount(); });
+
+  function addFiles(fileList: FileList) {
+    if (state.converting) return;
+    const newFiles = Array.from(fileList).filter(f => f.type.startsWith('image/'));
+    if (state.files.length + newFiles.length > 50) {
+      alert(__t('tool-alert-max'));
+      return;
+    }
+    state.files.push(...newFiles);
+    results.classList.add('hidden');
+    state.results = [];
+    renderPreview();
+  }
+
+  function renderPreview() {
+    previewArea.classList.remove('hidden');
+    previewCount.textContent = __t('convert-preview-selected', { n: String(state.files.length) });
+    previewGrid.innerHTML = '';
+    state.files.forEach((file, idx) => {
+      const url = URL.createObjectURL(file);
+      const chip = document.createElement('div');
+      chip.className = 'relative group inline-flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-3 py-2.5 shadow-sm transition-all duration-200 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-900';
+      chip.innerHTML = `
+        <div class="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-lg bg-neutral-100 dark:bg-neutral-800">
+          <img src="${url}" alt="" class="h-full w-full object-cover" />
+        </div>
+        <div class="flex min-w-0 flex-col gap-0.5">
+          <span class="max-w-[120px] truncate text-xs font-medium text-neutral-700 dark:text-neutral-200">${file.name}</span>
+          <span class="text-[11px] text-neutral-400 dark:text-neutral-500">${(file.size / 1000).toFixed(1)} KB</span>
+        </div>
+        <button class="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-rose-100 text-[10px] leading-none text-rose-500 transition-colors hover:bg-rose-500 hover:text-white dark:bg-rose-900/40 dark:text-rose-400 dark:hover:bg-rose-600 dark:hover:text-white" data-remove="${idx}">&times;</button>
+      `;
+      previewGrid.appendChild(chip);
+    });
+
+    previewGrid.querySelectorAll('[data-remove]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        const idx = parseInt((btn as HTMLElement).dataset.remove!);
+        state.files.splice(idx, 1);
+        if (state.files.length === 0) {
+          resetAll();
+        } else {
+          renderPreview();
+        }
+      });
+    });
+  }
+
+  function resetAll() {
+    state.files = [];
+    state.results = [];
+    state.converting = false;
+    previewArea.classList.add('hidden');
+    previewGrid.innerHTML = '';
+    progressBar.classList.add('hidden');
+    results.classList.add('hidden');
+    fileInput.value = '';
+    progressFill.style.width = '0%';
+    progressText.textContent = __t('tool-progress-preparing');
+  }
+
+  async function convertAll() {
+    if (state.files.length === 0 || state.converting) return;
+    state.converting = true;
+    state.results = [];
+    results.classList.remove('hidden');
+    summaryBar.classList.add('hidden');
+    progressBar.classList.remove('hidden');
+    imageGrid.innerHTML = '';
+    convertBtn.setAttribute('disabled', 'true');
+    convertBtn.textContent = __t('convert-progress-converting', { n: '', total: String(state.files.length), name: '' });
+
+    const quality = parseInt(qualitySlider.value) / 100;
+
+    let totalOriginal = 0;
+    let totalCompressed = 0;
+
+    for (let i = 0; i < state.files.length; i++) {
+      const file = state.files[i];
+      progressFill.style.width = ((i / state.files.length) * 100) + '%';
+      progressText.textContent = __t('convert-progress-converting', { n: String(i+1), total: String(state.files.length), name: file.name });
+
+      try {
+        const result = await convertImage(file, quality, state.targetFormat);
+        if (result) {
+          state.results.push(result);
+          totalOriginal += result.originalSize;
+          totalCompressed += result.compressedSize;
+          appendResultCard(result, i);
+        }
+      } catch (err) {
+        console.error(`转换失败: ${file.name}`, err);
+      }
+    }
+
+    const formatLabel = getFormatLabel(state.targetFormat);
+    summaryText.textContent = __t('convert-summary', { n: String(state.results.length), fmt: formatLabel });
+    summaryBar.classList.remove('hidden');
+    progressFill.style.width = '100%';
+    progressText.textContent = __t('convert-progress-done');
+    setTimeout(() => { progressBar.classList.add('hidden'); }, 2500);
+
+    state.converting = false;
+    convertBtn.removeAttribute('disabled');
+    convertBtn.textContent = __t('convert-btn-start');
+  }
+
+  function convertImage(file: File, quality: number, format: string): Promise<typeof state.results[0] | null> {
+    return new Promise((resolve) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        const w = img.naturalWidth;
+        const h = img.naturalHeight;
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d')!;
+        ctx.drawImage(img, 0, 0, w, h);
+
+        canvas.toBlob((blob) => {
+          if (!blob) { resolve(null); return; }
+          const compressedUrl = URL.createObjectURL(blob);
+          resolve({
+            name: file.name,
+            originalSize: file.size,
+            compressedSize: blob.size,
+            originalUrl: URL.createObjectURL(file),
+            compressedUrl,
+            width: w,
+            height: h,
+          });
+        }, format, quality);
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
+      img.src = url;
+    });
+  }
+
+  function appendResultCard(r: typeof state.results[0], index: number) {
+    const pct = ((1 - r.compressedSize / r.originalSize) * 100).toFixed(1);
+    const origKB = (r.originalSize / 1000).toFixed(1);
+    const compKB = (r.compressedSize / 1000).toFixed(1);
+    const grew = r.compressedSize > r.originalSize;
+    const arrow = grew
+      ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="inline-block text-red-500"><polyline points="18 15 12 9 6 15"/></svg>'
+      : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="inline-block text-green-500"><polyline points="6 9 12 15 18 9"/></svg>';
+    const pctColor = grew ? 'text-red-600 bg-red-100 dark:bg-red-900/40 dark:text-red-400' : 'text-emerald-600 bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-400';
+    const pctSign = grew ? '+' : (parseFloat(pct) > 0 ? '-' : '');
+
+    const card = document.createElement('div');
+    card.className = 'result-card group rounded-2xl bg-white/80 shadow-sm transition-all hover:shadow-md dark:bg-neutral-900/80 overflow-hidden';
+    card.setAttribute('data-index', String(index));
+    card.innerHTML = `
+      <div class="relative aspect-square cursor-pointer overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+        <img src="${r.compressedUrl}" alt="${r.name}" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+        <div class="fold-corner absolute right-0 top-0 z-10 h-0 w-0 cursor-pointer transition-colors duration-200" style="border-style:solid;border-width:0 28px 28px 0;border-color:transparent #22c55e transparent transparent" data-remove-result="${index}">
+          <span class="fold-icon pointer-events-none absolute text-[10px] font-bold leading-none text-white" style="top:3px;right:-24px">✓</span>
+        </div>
+      </div>
+      <div class="px-2 py-1.5">
+        <p class="truncate text-[11px] font-medium text-neutral-700 dark:text-neutral-200" title="${r.name}">${r.name}</p>
+        <div class="mt-0.5 flex items-center justify-between gap-1 text-[10px]">
+          <div class="flex min-w-0 items-center gap-1">
+            <span class="text-neutral-400 dark:text-neutral-500">${origKB}KB</span>
+            ${arrow}
+            <span class="font-semibold text-neutral-700 dark:text-neutral-300">${compKB}KB</span>
+            <span class="rounded-full px-1 py-0.5 text-[9px] font-semibold ${pctColor}">${pctSign}${Math.abs(parseFloat(pct))}%</span>
+          </div>
+          <button class="download-single flex-shrink-0 rounded p-0.5 text-neutral-400 transition-colors hover:text-emerald-600 hover:bg-emerald-50 dark:text-neutral-500 dark:hover:text-emerald-400 dark:hover:bg-emerald-900/40" title="下载" data-url="${r.compressedUrl}" data-name="${getOutputName(r.name, state.targetFormat)}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+        </div>
+      </div>
+    `;
+    imageGrid.appendChild(card);
+
+    card.querySelector('img')!.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const lb = document.getElementById('lightbox')!;
+      (document.getElementById('lightboxImg') as HTMLImageElement).src = r.compressedUrl;
+      lb.classList.remove('hidden');
+      lb.classList.add('flex');
+    });
+
+    const fold = card.querySelector('.fold-corner') as HTMLElement;
+    const foldIcon = fold.querySelector('.fold-icon') as HTMLElement;
+    fold.addEventListener('mouseenter', () => {
+      fold.style.borderColor = 'transparent #ef4444 transparent transparent';
+      foldIcon.textContent = '✕';
+      foldIcon.style.fontSize = '11px';
+    });
+    fold.addEventListener('mouseleave', () => {
+      fold.style.borderColor = 'transparent #22c55e transparent transparent';
+      foldIcon.textContent = '✓';
+      foldIcon.style.fontSize = '';
+    });
+    fold.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      const idx = parseInt((fold as HTMLElement).dataset.removeResult!);
+      state.results.splice(idx, 1);
+      card.remove();
+      imageGrid.querySelectorAll('.result-card').forEach((c2, i2) => {
+        (c2 as HTMLElement).setAttribute('data-index', String(i2));
+        const fc = c2.querySelector('.fold-corner') as HTMLElement;
+        if (fc) fc.setAttribute('data-remove-result', String(i2));
+      });
+      if (state.results.length === 0) { summaryBar.classList.add('hidden'); imageGrid.innerHTML = ''; }
+    });
+
+    const dlBtn = card.querySelector('.download-single') as HTMLElement;
+    if (dlBtn) {
+      dlBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); e.preventDefault();
+        downloadFile(dlBtn.dataset.url!, dlBtn.dataset.name!);
+      });
+    }
+  }
+
+  function getFormatLabel(format: string): string {
+    if (format === 'image/jpeg') return 'JPG';
+    if (format === 'image/webp') return 'WebP';
+    if (format === 'image/png') return 'PNG';
+    if (format === 'image/bmp') return 'BMP';
+    return format;
+  }
+
+  function getOutputName(originalName: string, format: string): string {
+    const dotIdx = originalName.lastIndexOf('.');
+    const baseName = dotIdx > -1 ? originalName.substring(0, dotIdx) : originalName;
+    if (format === 'image/jpeg') return baseName + '.jpg';
+    if (format === 'image/webp') return baseName + '.webp';
+    if (format === 'image/png') return baseName + '.png';
+    if (format === 'image/bmp') return baseName + '.bmp';
+    return originalName;
+  }
+
+  function downloadFile(url: string, filename: string) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  downloadAllBtn.addEventListener('click', async () => {
+    if (state.results.length === 0) return;
+    downloadAllBtn.textContent = __t('tool-download-packing');
+    downloadAllBtn.setAttribute('disabled', 'true');
+    try {
+      const JSZip = await loadJSZip();
+      const zip = new JSZip();
+      for (const r of state.results) {
+        const blob = await fetch(r.compressedUrl).then(res => res.blob());
+        zip.file(getOutputName(r.name, state.targetFormat), blob);
+      }
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      downloadFile(URL.createObjectURL(zipBlob), 'converted-images.zip');
+    } catch (err) {
+      alert(__t('tool-alert-pack-fail'));
+    }
+    downloadAllBtn.textContent = __t('tool-download-all');
+    downloadAllBtn.removeAttribute('disabled');
+  });
+
+  function loadJSZip(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      // @ts-ignore
+      if (typeof JSZip !== 'undefined') { resolve(JSZip); return; }
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+      script.onload = () => {
+        // @ts-ignore
+        if (typeof JSZip !== 'undefined') resolve(JSZip);
+        else reject(new Error('JSZip failed to load'));
+      };
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+</script>
