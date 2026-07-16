@@ -1,0 +1,649 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout
+  title="在线图片尺寸调整 | AI 项目 | Portfolio"
+  description="在线图片尺寸调整工具，自由输入目标宽高或使用快捷预设尺寸，保持比例批量缩放，纯本地处理保护隐私。"
+  keywords="图片尺寸调整, 图片缩放, 在线改尺寸, 批量缩放, 图片裁剪"
+>
+
+<div class="site-container mx-auto py-12 md:py-20">
+  <!-- Hero -->
+  <div class="relative z-20 mx-auto mb-12 text-center md:mb-16">
+    <h1 class="font-sans text-4xl font-bold tracking-normal text-neutral-900 dark:text-white sm:text-5xl">
+      <span data-i18n="resize-title-prefix">在线图片</span><span class="text-primary dark:text-primary-light" data-i18n="resize-title-highlight">尺寸调整</span>
+    </h1>
+    <p class="mx-auto mt-4 max-w-xl text-sm leading-7 text-neutral-700 dark:text-neutral-300 sm:mt-4 sm:text-base lg:text-lg" data-i18n="resize-hero-desc">
+      纯浏览器端处理，图片不会上传到任何服务器。
+      自由输入目标尺寸或使用快捷预设，支持 JPG / PNG / WebP 批量缩放。
+    </p>
+  </div>
+
+  <!-- Control Bar — Width/Height inputs are the STAR -->
+  <div id="controlBar" class="mb-5 flex flex-wrap items-center gap-4 rounded-xl border border-neutral-200 bg-white/80 px-6 py-4 dark:border-neutral-700 dark:bg-neutral-900/80">
+    <!-- Width/Height inputs — PRIMARY -->
+    <div class="flex items-center gap-2">
+      <span class="whitespace-nowrap text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="resize-label-size">📐 目标尺寸</span>
+      <div class="flex items-center gap-1">
+        <label class="text-xs font-medium text-neutral-500 dark:text-neutral-400" data-i18n="resize-label-w">宽</label>
+        <input id="resizeWidth" type="number" min="1" max="7680" placeholder="自动" class="w-20 rounded-lg border border-neutral-200 bg-white px-2.5 py-2 text-sm font-medium text-neutral-700 focus:border-primary focus:ring-2 focus:ring-primary/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-200" />
+        <span class="text-xs text-neutral-400 dark:text-neutral-500">px</span>
+        <button id="lockRatio" class="ml-1 flex items-center justify-center rounded-lg border border-primary bg-white p-1.5 text-primary transition-colors dark:border-primary-light dark:text-primary-light" title="锁定宽高比">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </button>
+        <label class="text-xs font-medium text-neutral-500 dark:text-neutral-400 ml-1" data-i18n="resize-label-h">高</label>
+        <input id="resizeHeight" type="number" min="1" max="7680" placeholder="自动" class="w-20 rounded-lg border border-neutral-200 bg-white px-2.5 py-2 text-sm font-medium text-neutral-700 focus:border-primary focus:ring-2 focus:ring-primary/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-200" />
+        <span class="text-xs text-neutral-400 dark:text-neutral-500">px</span>
+      </div>
+    </div>
+
+    <span class="hidden h-6 w-px bg-neutral-200 dark:bg-neutral-700 sm:block"></span>
+
+    <!-- Quick presets -->
+    <div class="flex items-center gap-2">
+      <span class="whitespace-nowrap text-xs font-medium text-neutral-500 dark:text-neutral-400" data-i18n="resize-label-presets">快捷尺寸</span>
+      <div class="flex gap-1">
+        <button class="size-btn rounded-lg border border-neutral-200 px-2.5 py-1.5 text-xs font-medium text-neutral-600 transition-all hover:border-primary/50 hover:text-primary hover:bg-primary/5 dark:border-neutral-600 dark:text-neutral-400 dark:hover:border-primary/40 dark:hover:text-primary-light" data-w="3840" data-h="2160">4K</button>
+        <button class="size-btn rounded-lg border border-neutral-200 px-2.5 py-1.5 text-xs font-medium text-neutral-600 transition-all hover:border-primary/50 hover:text-primary hover:bg-primary/5 dark:border-neutral-600 dark:text-neutral-400 dark:hover:border-primary/40 dark:hover:text-primary-light" data-w="2560" data-h="1440">2K</button>
+        <button class="size-btn rounded-lg border border-neutral-200 px-2.5 py-1.5 text-xs font-medium text-neutral-600 transition-all hover:border-primary/50 hover:text-primary hover:bg-primary/5 dark:border-neutral-600 dark:text-neutral-400 dark:hover:border-primary/40 dark:hover:text-primary-light" data-w="1920" data-h="1080">1080p</button>
+        <button class="size-btn rounded-lg border border-neutral-200 px-2.5 py-1.5 text-xs font-medium text-neutral-600 transition-all hover:border-primary/50 hover:text-primary hover:bg-primary/5 dark:border-neutral-600 dark:text-neutral-400 dark:hover:border-primary/40 dark:hover:text-primary-light" data-w="1280" data-h="720">720p</button>
+        <button class="size-btn rounded-lg border border-neutral-200 px-2.5 py-1.5 text-xs font-medium text-neutral-600 transition-all hover:border-primary/50 hover:text-primary hover:bg-primary/5 dark:border-neutral-600 dark:text-neutral-400 dark:hover:border-primary/40 dark:hover:text-primary-light" data-w="800" data-h="0">800w</button>
+      </div>
+    </div>
+
+    <span class="hidden h-6 w-px bg-neutral-200 dark:bg-neutral-700 sm:block"></span>
+
+    <!-- Format + Quality — secondary -->
+    <div class="flex items-center gap-2">
+      <span class="whitespace-nowrap text-xs font-medium text-neutral-500 dark:text-neutral-400" data-i18n="resize-label-format">输出格式</span>
+      <select id="formatSelect" class="rounded-lg border border-neutral-200 bg-white px-2.5 py-1.5 text-xs font-medium text-neutral-700 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-200">
+        <option value="auto" selected>保持原格式</option>
+        <option value="image/jpeg">JPEG</option>
+        <option value="image/webp">WebP</option>
+        <option value="image/png">PNG</option>
+      </select>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <span class="whitespace-nowrap text-xs font-medium text-neutral-500 dark:text-neutral-400" data-i18n="resize-label-quality">画质</span>
+      <input id="qualitySlider" type="range" min="10" max="100" value="100" class="h-1.5 w-24 accent-primary" />
+      <span id="qualityLabel" class="inline-flex min-w-[2.5rem] items-center justify-center rounded bg-primary/10 px-1.5 py-0.5 text-xs font-semibold text-primary dark:bg-primary/20 dark:text-primary-light">100%</span>
+    </div>
+
+    <!-- Actions — right side -->
+    <div class="ml-auto flex items-center gap-2">
+      <button id="resizeBtn" class="rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary-strong hover:shadow-xl hover:shadow-primary/30 active:scale-95 dark:bg-primary-dark dark:shadow-primary/15 dark:hover:bg-primary" data-i18n="resize-btn-start">
+        开始调整
+      </button>
+      <button id="clearBtn" class="rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-sm font-medium text-neutral-500 transition-all hover:border-red-300 hover:text-red-500 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:border-red-600 dark:hover:text-red-400" data-i18n="tool-btn-clear">
+        清空
+      </button>
+    </div>
+  </div>
+
+  <!-- Upload Zone -->
+  <div
+    id="dropZone"
+    class="flex w-full cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-neutral-300 bg-white/60 px-6 py-16 transition-all duration-300 hover:border-primary/50 hover:bg-primary/[0.02] dark:border-neutral-600 dark:bg-neutral-900/50 dark:hover:border-primary/40 dark:hover:bg-primary/[0.03] md:py-20"
+  >
+    <div class="mb-5 flex h-18 w-18 items-center justify-center rounded-2xl bg-primary/10 dark:bg-primary/20">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-primary dark:text-primary-light">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="17 8 12 3 7 8"/>
+        <line x1="12" y1="3" x2="12" y2="15"/>
+      </svg>
+    </div>
+    <p class="text-base font-medium text-neutral-700 dark:text-neutral-200 sm:text-lg">
+      <span data-i18n="resize-upload">拖拽图片到此处，或</span><span class="text-primary dark:text-primary-light" data-i18n="resize-upload-click">点击上传</span>
+    </p>
+    <p class="mt-2 text-xs text-neutral-400 dark:text-neutral-500 sm:text-sm" data-i18n="resize-upload-hint">
+      Ctrl+V 粘贴图片 ｜ 支持 JPG / PNG / WebP ｜ 一次最多 50 张
+    </p>
+    <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp" multiple class="hidden" />
+  </div>
+
+  <!-- Small Thumbnail Previews -->
+  <div id="previewArea" class="mx-auto mt-5 hidden max-w-4xl">
+    <div class="mb-3 flex items-center justify-between">
+      <span id="previewCount" class="text-sm font-medium text-neutral-600 dark:text-neutral-300"></span>
+      <button id="clearPreviewBtn" class="text-xs text-neutral-400 transition-colors hover:text-red-500 dark:text-neutral-500 dark:hover:text-red-400" data-i18n="tool-clear-all">清空全部</button>
+    </div>
+    <div id="previewGrid" class="flex flex-wrap gap-2"></div>
+  </div>
+
+  <!-- Progress -->
+  <div id="progressBar" class="mx-auto mt-5 hidden max-w-md">
+    <div class="overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-700">
+      <div id="progressFill" class="h-2 rounded-full bg-primary transition-all duration-300 dark:bg-primary-dark" style="width: 0%"></div>
+    </div>
+    <p id="progressText" class="mt-1 text-center text-xs text-neutral-400 dark:text-neutral-500" data-i18n="tool-progress-preparing">准备中...</p>
+  </div>
+
+  <!-- Results -->
+  <div id="results" class="mx-auto mt-8 hidden max-w-5xl">
+    <div id="summaryBar" class="mb-6 flex flex-wrap items-center gap-3 rounded-xl border border-green-200 bg-green-50/80 px-5 py-3 dark:border-green-800 dark:bg-green-950/50">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-green-600 dark:text-green-400"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <span id="summaryText" class="text-sm font-medium text-green-700 dark:text-green-300"></span>
+      <button id="downloadAllBtn" class="ml-auto rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-white transition-all hover:bg-primary-strong active:scale-95 dark:bg-primary-dark dark:hover:bg-primary" data-i18n="tool-download-all">
+        📦 批量下载
+      </button>
+    </div>
+    <div id="imageGrid" class="grid gap-3" style="grid-template-columns:repeat(auto-fill,minmax(220px,300px))"></div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4" onclick="this.classList.add('hidden')">
+    <button class="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-2xl text-white transition-colors hover:bg-white/40" onclick="document.getElementById('lightbox')!.classList.add('hidden')">&times;</button>
+    <img id="lightboxImg" src="" alt="预览" class="max-h-[90vh] max-w-full rounded-xl object-contain shadow-2xl" onclick="event.stopPropagation()" />
+  </div>
+
+  <!-- Features -->
+  <div class="mx-auto max-w-4xl mt-20">
+    <h2 class="mb-10 text-center font-sans text-3xl font-bold tracking-normal text-neutral-900 dark:text-white sm:text-4xl" data-i18n="resize-feature-title">
+      100% 免费 · 精确尺寸调整
+    </h2>
+    <div class="grid gap-8 sm:grid-cols-2">
+      <div class="flex gap-4">
+        <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-2xl dark:bg-blue-950">📐</div>
+        <div>
+          <h3 class="mb-1 text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="resize-feat1-title">精确尺寸</h3>
+          <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400" data-i18n="resize-feat1-desc">自由输入目标宽高（1-7680px），或一键选择 4K / 2K / 1080p 等常用预设尺寸。</p>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-green-50 text-2xl dark:bg-green-950">🔒</div>
+        <div>
+          <h3 class="mb-1 text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="resize-feat2-title">保持比例</h3>
+          <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400" data-i18n="resize-feat2-desc">填写宽度后高度自动按原图比例计算；也可解锁比例，独立设置宽高。</p>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-purple-50 text-2xl dark:bg-purple-950">📦</div>
+        <div>
+          <h3 class="mb-1 text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="resize-feat3-title">批量处理</h3>
+          <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400" data-i18n="resize-feat3-desc">支持拖拽多图、Ctrl+V 粘贴，一次调整最多 50 张图片。</p>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-2xl dark:bg-orange-950">⚡</div>
+        <div>
+          <h3 class="mb-1 text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="resize-feat4-title">隐私安全</h3>
+          <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400" data-i18n="resize-feat4-desc">纯浏览器端处理，图片不会离开你的设备，绝不上传服务器。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="mx-auto mt-16 max-w-2xl pb-16">
+    <h2 class="mb-8 text-center font-sans text-2xl font-bold text-neutral-900 dark:text-white sm:text-3xl" data-i18n="resize-faq-title">常见问题</h2>
+    <div class="space-y-6">
+      <div>
+        <h3 class="mb-1.5 text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="resize-faq1-q">调整尺寸会改变画质吗？</h3>
+        <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400" data-i18n="resize-faq1-a">缩小尺寸不会降低原始画质，反而会让图片更清晰。放大图片可能产生轻微模糊，建议以原始尺寸为上限。</p>
+      </div>
+      <div>
+        <h3 class="mb-1.5 text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="resize-faq2-q">如何保持原始比例？</h3>
+        <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400" data-i18n="resize-faq2-a">默认锁定宽高比（🔒图标），只需输入宽度，高度会自动按原图比例计算。点击解锁后可独立设置宽高。</p>
+      </div>
+      <div>
+        <h3 class="mb-1.5 text-sm font-semibold text-neutral-800 dark:text-neutral-200" data-i18n="resize-faq3-q">支持多大的尺寸范围？</h3>
+        <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400" data-i18n="resize-faq3-a">支持 1-7680px 范围，常见尺寸（4K、2K、1080p、720p）一键切换，也可自定义输入任意像素值。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</Layout>
+
+<script>
+  const state = {
+    files: [] as File[],
+    results: [] as { name: string; originalSize: number; compressedSize: number; originalUrl: string; compressedUrl: string; width: number; height: number }[],
+    resizing: false,
+    ratioLocked: true,
+    lastFileRatio: 0,
+  };
+
+  const dropZone = document.getElementById('dropZone')!;
+  const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+  const progressBar = document.getElementById('progressBar')!;
+  const progressFill = document.getElementById('progressFill')!;
+  const progressText = document.getElementById('progressText')!;
+  const results = document.getElementById('results')!;
+  const summaryBar = document.getElementById('summaryBar')!;
+  const summaryText = document.getElementById('summaryText')!;
+  const imageGrid = document.getElementById('imageGrid')!;
+  const resizeBtn = document.getElementById('resizeBtn')!;
+  const clearBtn = document.getElementById('clearBtn')!;
+  const downloadAllBtn = document.getElementById('downloadAllBtn')!;
+  const previewArea = document.getElementById('previewArea')!;
+  const previewGrid = document.getElementById('previewGrid')!;
+  const previewCount = document.getElementById('previewCount')!;
+  const clearPreviewBtn = document.getElementById('clearPreviewBtn')!;
+  const qualitySlider = document.getElementById('qualitySlider') as HTMLInputElement;
+  const qualityLabel = document.getElementById('qualityLabel')!;
+  const formatSelect = document.getElementById('formatSelect') as HTMLSelectElement;
+  const resizeWidth = document.getElementById('resizeWidth') as HTMLInputElement;
+  const resizeHeight = document.getElementById('resizeHeight') as HTMLInputElement;
+  const lockRatio = document.getElementById('lockRatio')!;
+
+  // Width input → auto-calc height when ratio locked
+  resizeWidth.addEventListener('input', () => {
+    if (state.ratioLocked && state.lastFileRatio > 0 && resizeWidth.value) {
+      const w = parseInt(resizeWidth.value);
+      if (w > 0) {
+        resizeHeight.value = Math.round(w / state.lastFileRatio).toString();
+      }
+    }
+  });
+
+  resizeHeight.addEventListener('input', () => {
+    if (state.ratioLocked && state.lastFileRatio > 0 && resizeHeight.value) {
+      const h = parseInt(resizeHeight.value);
+      if (h > 0) {
+        resizeWidth.value = Math.round(h * state.lastFileRatio).toString();
+      }
+    }
+  });
+
+  // Lock toggle
+  lockRatio.addEventListener('click', () => {
+    state.ratioLocked = !state.ratioLocked;
+    const svg = lockRatio.querySelector('svg')!;
+    if (state.ratioLocked) {
+      lockRatio.classList.add('text-primary', 'border-primary');
+      lockRatio.classList.remove('text-neutral-400');
+      svg.innerHTML = '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>';
+      // Recalc height
+      if (resizeWidth.value && state.lastFileRatio > 0) {
+        resizeHeight.value = Math.round(parseInt(resizeWidth.value) / state.lastFileRatio).toString();
+      }
+    } else {
+      lockRatio.classList.remove('text-primary', 'border-primary');
+      lockRatio.classList.add('text-neutral-400');
+      svg.innerHTML = '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><line x1="17" y1="4" x2="7" y2="14" stroke="currentColor" stroke-width="2"/>';
+    }
+  });
+
+  // Quick preset buttons
+  document.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const w = (btn as HTMLElement).dataset.w!;
+      const h = (btn as HTMLElement).dataset.h!;
+      resizeWidth.value = w;
+      if (h !== '0') {
+        resizeHeight.value = h;
+        state.ratioLocked = false;
+        lockRatio.classList.remove('text-primary', 'border-primary');
+        lockRatio.classList.add('text-neutral-400');
+        const svg = lockRatio.querySelector('svg')!;
+        svg.innerHTML = '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><line x1="17" y1="4" x2="7" y2="14" stroke="currentColor" stroke-width="2"/>';
+      } else {
+        resizeHeight.value = '';
+        state.ratioLocked = true;
+        lockRatio.classList.add('text-primary', 'border-primary');
+        lockRatio.classList.remove('text-neutral-400');
+        const svg = lockRatio.querySelector('svg')!;
+        svg.innerHTML = '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>';
+        if (state.lastFileRatio > 0) {
+          resizeHeight.value = Math.round(parseInt(w) / state.lastFileRatio).toString();
+        }
+      }
+    });
+  });
+
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-primary', 'bg-primary/[0.05]'); });
+  dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('border-primary', 'bg-primary/[0.05]'); });
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('border-primary', 'bg-primary/[0.05]');
+    if (e.dataTransfer?.files) addFiles(e.dataTransfer.files);
+  });
+  fileInput.addEventListener('change', () => { if (fileInput.files) addFiles(fileInput.files); });
+  document.addEventListener('paste', (e) => {
+    if (e.clipboardData?.files.length) { e.preventDefault(); addFiles(e.clipboardData.files); }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { const lb = document.getElementById('lightbox')!; lb.classList.add('hidden'); lb.classList.remove('flex'); }
+  });
+  qualitySlider.addEventListener('input', () => { qualityLabel.textContent = qualitySlider.value + '%'; });
+  resizeBtn.addEventListener('click', () => resizeAll());
+  clearBtn.addEventListener('click', () => resetAll());
+  clearPreviewBtn.addEventListener('click', () => resetAll());
+
+  // --- i18n helpers ---
+  function __t(key, vars) {
+    var lang = localStorage.getItem('lang') || 'zh';
+    try {
+      var t = i18n[lang] || i18n.zh;
+      var s = t[key] || key;
+      if (vars) { Object.keys(vars).forEach(function(k) { s = s.split('{'+k+'}').join(vars[k]); }); }
+      return s;
+    } catch(e) { return key; }
+  }
+
+  function updatePreviewCount() {
+    if (state.files.length > 0) {
+      previewCount.textContent = __t('resize-preview-selected', { n: String(state.files.length) });
+    }
+  }
+  window.addEventListener('langchange', function() { updatePreviewCount(); });
+
+  function addFiles(fileList: FileList) {
+    if (state.resizing) return;
+    const newFiles = Array.from(fileList).filter(f => f.type.startsWith('image/'));
+    if (state.files.length + newFiles.length > 50) {
+      alert(__t('tool-alert-max'));
+      return;
+    }
+    state.files.push(...newFiles);
+    results.classList.add('hidden');
+    state.results = [];
+
+    // Set aspect ratio from first file for lock
+    if (state.files.length > 0) {
+      const url = URL.createObjectURL(state.files[0]);
+      const img = new Image();
+      img.onload = () => {
+        state.lastFileRatio = img.naturalWidth / img.naturalHeight;
+        URL.revokeObjectURL(url);
+        // If user already typed a width, auto-calc height
+        if (state.ratioLocked && resizeWidth.value) {
+          const w = parseInt(resizeWidth.value);
+          if (w > 0) {
+            resizeHeight.value = Math.round(w / state.lastFileRatio).toString();
+          }
+        }
+      };
+      img.src = url;
+    }
+
+    renderPreview();
+  }
+
+  function renderPreview() {
+    previewArea.classList.remove('hidden');
+    previewCount.textContent = __t('resize-preview-selected', { n: String(state.files.length) });
+    previewGrid.innerHTML = '';
+    state.files.forEach((file, idx) => {
+      const url = URL.createObjectURL(file);
+      const chip = document.createElement('div');
+      chip.className = 'relative group inline-flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-3 py-2.5 shadow-sm transition-all duration-200 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-900';
+      chip.innerHTML = `
+        <div class="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-lg bg-neutral-100 dark:bg-neutral-800">
+          <img src="${url}" alt="" class="h-full w-full object-cover" />
+        </div>
+        <div class="flex min-w-0 flex-col gap-0.5">
+          <span class="max-w-[120px] truncate text-xs font-medium text-neutral-700 dark:text-neutral-200">${file.name}</span>
+          <span class="text-[11px] text-neutral-400 dark:text-neutral-500">${(file.size / 1000).toFixed(1)} KB</span>
+        </div>
+        <button class="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-rose-100 text-[10px] leading-none text-rose-500 transition-colors hover:bg-rose-500 hover:text-white dark:bg-rose-900/40 dark:text-rose-400 dark:hover:bg-rose-600 dark:hover:text-white" data-remove="${idx}">&times;</button>
+      `;
+      previewGrid.appendChild(chip);
+    });
+
+    previewGrid.querySelectorAll('[data-remove]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        const idx = parseInt((btn as HTMLElement).dataset.remove!);
+        state.files.splice(idx, 1);
+        if (state.files.length === 0) {
+          resetAll();
+        } else {
+          renderPreview();
+        }
+      });
+    });
+  }
+
+  function resetAll() {
+    state.files = [];
+    state.results = [];
+    state.resizing = false;
+    previewArea.classList.add('hidden');
+    previewGrid.innerHTML = '';
+    progressBar.classList.add('hidden');
+    results.classList.add('hidden');
+    fileInput.value = '';
+    progressFill.style.width = '0%';
+    progressText.textContent = __t('tool-progress-preparing');
+    resizeWidth.value = '';
+    resizeHeight.value = '';
+  }
+
+  async function resizeAll() {
+    if (state.files.length === 0 || state.resizing) return;
+    state.resizing = true;
+    state.results = [];
+    results.classList.remove('hidden');
+    summaryBar.classList.add('hidden');
+    progressBar.classList.remove('hidden');
+    imageGrid.innerHTML = '';
+    resizeBtn.setAttribute('disabled', 'true');
+    resizeBtn.textContent = __t('resize-progress-resizing', { n: '', total: String(state.files.length), name: '' });
+
+    const quality = parseInt(qualitySlider.value) / 100;
+    const format = formatSelect.value;
+    const targetW = parseInt(resizeWidth.value) || 0;
+    const targetH = parseInt(resizeHeight.value) || 0;
+
+    let totalOriginal = 0;
+    let totalCompressed = 0;
+
+    for (let i = 0; i < state.files.length; i++) {
+      const file = state.files[i];
+      progressFill.style.width = ((i / state.files.length) * 100) + '%';
+      progressText.textContent = __t('resize-progress-resizing', { n: String(i+1), total: String(state.files.length), name: file.name });
+
+      try {
+        const result = await resizeImage(file, quality, format, targetW, targetH);
+        if (result) {
+          state.results.push(result);
+          totalOriginal += result.originalSize;
+          totalCompressed += result.compressedSize;
+          appendResultCard(result, i);
+        }
+      } catch (err) {
+        console.error(`调整失败: ${file.name}`, err);
+      }
+    }
+
+    summaryText.textContent = __t('resize-summary', { n: String(state.results.length) });
+    summaryBar.classList.remove('hidden');
+    progressFill.style.width = '100%';
+    progressText.textContent = __t('resize-progress-done');
+    setTimeout(() => { progressBar.classList.add('hidden'); }, 2500);
+
+    state.resizing = false;
+    resizeBtn.removeAttribute('disabled');
+    resizeBtn.textContent = __t('resize-btn-start');
+  }
+
+  function resizeImage(file: File, quality: number, format: string, targetW: number, targetH: number): Promise<typeof state.results[0] | null> {
+    return new Promise((resolve) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        let w = img.naturalWidth;
+        let h = img.naturalHeight;
+
+        if (targetW > 0 && targetH > 0) {
+          w = targetW;
+          h = targetH;
+        } else if (targetW > 0) {
+          h = Math.round((targetW / w) * h);
+          w = targetW;
+        } else if (targetH > 0) {
+          w = Math.round((targetH / h) * w);
+          h = targetH;
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d')!;
+        ctx.drawImage(img, 0, 0, w, h);
+
+        let mimeType = format;
+        if (mimeType === 'auto') {
+          if (file.type === 'image/png') mimeType = 'image/png';
+          else if (file.type === 'image/webp') mimeType = 'image/webp';
+          else mimeType = 'image/jpeg';
+        }
+
+        canvas.toBlob((blob) => {
+          if (!blob) { resolve(null); return; }
+          const compressedUrl = URL.createObjectURL(blob);
+          resolve({
+            name: file.name,
+            originalSize: file.size,
+            compressedSize: blob.size,
+            originalUrl: URL.createObjectURL(file),
+            compressedUrl,
+            width: w,
+            height: h,
+          });
+        }, mimeType, quality);
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
+      img.src = url;
+    });
+  }
+
+  function appendResultCard(r: typeof state.results[0], index: number) {
+    const pct = ((1 - r.compressedSize / r.originalSize) * 100).toFixed(1);
+    const origKB = (r.originalSize / 1000).toFixed(1);
+    const compKB = (r.compressedSize / 1000).toFixed(1);
+    const grew = r.compressedSize > r.originalSize;
+    const arrow = grew
+      ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="inline-block text-red-500"><polyline points="18 15 12 9 6 15"/></svg>'
+      : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="inline-block text-green-500"><polyline points="6 9 12 15 18 9"/></svg>';
+    const pctColor = grew ? 'text-red-600 bg-red-100 dark:bg-red-900/40 dark:text-red-400' : 'text-emerald-600 bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-400';
+    const pctSign = grew ? '+' : (parseFloat(pct) > 0 ? '-' : '');
+
+    const card = document.createElement('div');
+    card.className = 'result-card group rounded-2xl bg-white/80 shadow-sm transition-all hover:shadow-md dark:bg-neutral-900/80 overflow-hidden';
+    card.setAttribute('data-index', String(index));
+    card.innerHTML = `
+      <div class="relative aspect-square cursor-pointer overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+        <img src="${r.compressedUrl}" alt="${r.name}" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+        <div class="fold-corner absolute right-0 top-0 z-10 h-0 w-0 cursor-pointer transition-colors duration-200" style="border-style:solid;border-width:0 28px 28px 0;border-color:transparent #22c55e transparent transparent" data-remove-result="${index}">
+          <span class="fold-icon pointer-events-none absolute text-[10px] font-bold leading-none text-white" style="top:3px;right:-24px">✓</span>
+        </div>
+      </div>
+      <div class="px-2 py-1.5">
+        <p class="truncate text-[11px] font-medium text-neutral-700 dark:text-neutral-200" title="${r.name}">${r.name}</p>
+        <div class="mt-0.5 flex items-center justify-between gap-1 text-[10px]">
+          <div class="flex min-w-0 items-center gap-1">
+            <span class="text-neutral-400 dark:text-neutral-500">${r.width}×${r.height}</span>
+            <span class="text-neutral-400 dark:text-neutral-500">${compKB}KB</span>
+          </div>
+          <button class="download-single flex-shrink-0 rounded p-0.5 text-neutral-400 transition-colors hover:text-emerald-600 hover:bg-emerald-50 dark:text-neutral-500 dark:hover:text-emerald-400 dark:hover:bg-emerald-900/40" title="下载" data-url="${r.compressedUrl}" data-name="${r.name}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+        </div>
+      </div>
+    `;
+    imageGrid.appendChild(card);
+
+    card.querySelector('img')!.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const lb = document.getElementById('lightbox')!;
+      (document.getElementById('lightboxImg') as HTMLImageElement).src = r.compressedUrl;
+      lb.classList.remove('hidden');
+      lb.classList.add('flex');
+    });
+
+    const fold = card.querySelector('.fold-corner') as HTMLElement;
+    const foldIcon = fold.querySelector('.fold-icon') as HTMLElement;
+    fold.addEventListener('mouseenter', () => {
+      fold.style.borderColor = 'transparent #ef4444 transparent transparent';
+      foldIcon.textContent = '✕';
+      foldIcon.style.fontSize = '11px';
+    });
+    fold.addEventListener('mouseleave', () => {
+      fold.style.borderColor = 'transparent #22c55e transparent transparent';
+      foldIcon.textContent = '✓';
+      foldIcon.style.fontSize = '';
+    });
+    fold.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      const idx = parseInt((fold as HTMLElement).dataset.removeResult!);
+      state.results.splice(idx, 1);
+      card.remove();
+      imageGrid.querySelectorAll('.result-card').forEach((c2, i2) => {
+        (c2 as HTMLElement).setAttribute('data-index', String(i2));
+        const fc = c2.querySelector('.fold-corner') as HTMLElement;
+        if (fc) fc.setAttribute('data-remove-result', String(i2));
+      });
+      if (state.results.length === 0) { summaryBar.classList.add('hidden'); imageGrid.innerHTML = ''; }
+    });
+
+    const dlBtn = card.querySelector('.download-single') as HTMLElement;
+    if (dlBtn) {
+      dlBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); e.preventDefault();
+        downloadFile(dlBtn.dataset.url!, dlBtn.dataset.name!);
+      });
+    }
+  }
+
+  function getOutputName(originalName: string, format: string): string {
+    const dotIdx = originalName.lastIndexOf('.');
+    const baseName = dotIdx > -1 ? originalName.substring(0, dotIdx) : originalName;
+    if (format === 'image/jpeg') return baseName + '.jpg';
+    if (format === 'image/webp') return baseName + '.webp';
+    if (format === 'image/png') return baseName + '.png';
+    return originalName;
+  }
+
+  function downloadFile(url: string, filename: string) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  downloadAllBtn.addEventListener('click', async () => {
+    if (state.results.length === 0) return;
+    downloadAllBtn.textContent = __t('tool-download-packing');
+    downloadAllBtn.setAttribute('disabled', 'true');
+    try {
+      const JSZip = await loadJSZip();
+      const zip = new JSZip();
+      for (const r of state.results) {
+        const blob = await fetch(r.compressedUrl).then(res => res.blob());
+        zip.file(getOutputName(r.name, formatSelect.value), blob);
+      }
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      downloadFile(URL.createObjectURL(zipBlob), 'resized-images.zip');
+    } catch (err) {
+      alert(__t('tool-alert-pack-fail'));
+    }
+    downloadAllBtn.textContent = __t('tool-download-all');
+    downloadAllBtn.removeAttribute('disabled');
+  });
+
+  function loadJSZip(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      // @ts-ignore
+      if (typeof JSZip !== 'undefined') { resolve(JSZip); return; }
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+      script.onload = () => {
+        // @ts-ignore
+        if (typeof JSZip !== 'undefined') resolve(JSZip);
+        else reject(new Error('JSZip failed to load'));
+      };
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+</script>
