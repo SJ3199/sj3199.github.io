@@ -116,6 +116,10 @@ const filteredSocial = displaySocialIds.length > 0
       pointer-events: auto;
     }
   }
+  /* Narrow viewports: hide QR popup, use click-to-copy */
+  @media (max-width: 767px) {
+    .qr-popup { display: none !important; }
+  }
   /* Mobile: never show QR popup */
   @media (hover: none), (pointer: coarse) {
     .qr-popup {
