@@ -63,9 +63,9 @@ const i18n = {
     'exp2-hl4': '负责大型活动前期创意策划与框架搭建，主导方案迭代，明确设计方向',
     'exp2-hl5': '个人月均业绩 3W，带领团队完成京东 618、双 11 等全年度 S 级大促，统筹全流程节点，同时以主设计师身份参与创意执行',
     'exp2-hl6': '具备成熟团队管理经验，搭建标准化流程，推动团队设计能力提升。拥有成熟商业设计思维与行业洞察力，深耕电商视觉，精准把握市场与用户心理',
-    // --- AI Image Tools ---
-    'tool-page-title': 'AI 图像工具',
-    'tool-page-desc': '基于浏览器本地处理的AI图像工具集，无需上传到服务器，安全快速',
+    // --- AI Tools ---
+    'tool-page-title': '辅助创建的工具',
+    'tool-page-desc': '基于浏览器本地处理的AI工具集，无需上传到服务器，安全快速',
     'tool-card-compress-title': '图片压缩',
     'tool-card-compress-desc': '智能压缩引擎，自动优化图片体积。支持 JPG / PNG / WebP 格式',
     'tool-card-convert-title': '格式转换',
@@ -247,9 +247,9 @@ const i18n = {
     'exp2-hl4': 'Responsible for pre-event creative planning and framework development for major campaigns, led design iterations, and defined clear creative direction',
     'exp2-hl5': 'Averaged 30K RMB monthly performance, led team through JD 618, Singles Day and other annual S-level campaigns, managed full-process milestones while serving as lead designer on creative execution',
     'exp2-hl6': 'Possessed mature team management experience, established standardized workflows to drive design capability improvement. Strong commercial design thinking and industry insight, deep expertise in e-commerce visuals, accurately capturing market trends and user psychology',
-    // --- AI Image Tools ---
-    'tool-page-title': 'AI Image Tools',
-    'tool-page-desc': 'Browser-based AI image toolset, no server upload needed, safe and fast',
+    // --- AI Tools ---
+    'tool-page-title': 'Powered Tools',
+    'tool-page-desc': 'Browser-based AI toolkit, no server upload needed, safe and fast',
     'tool-card-compress-title': 'Image Compress',
     'tool-card-compress-desc': 'Smart compression engine, automatically optimize image size. Supports JPG / PNG / WebP formats',
     'tool-card-convert-title': 'Format Convert',
