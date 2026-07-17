@@ -1,0 +1,80 @@
+[
+  {
+    "id": "ai-chat",
+    "nameZh": "AI对话助手",
+    "nameEn": "AI Chat",
+    "tools": [
+      {"name": "ChatGPT", "descZh": "OpenAI 旗舰对话模型", "descEn": "OpenAI flagship conversational AI", "url": "https://chat.openai.com", "icon": "🤖"},
+      {"name": "DeepSeek", "descZh": "国产开源大模型，编程能力强", "descEn": "Open-source LLM, strong at coding", "url": "https://chat.deepseek.com", "icon": "🧠"},
+      {"name": "豆包", "descZh": "字节跳动AI助手，免费好用", "descEn": "ByteDance AI assistant, free", "url": "https://www.doubao.com", "icon": "🫘"},
+      {"name": "Kimi", "descZh": "长文本处理专家，200万字上下文", "descEn": "Long context specialist, 2M tokens", "url": "https://kimi.moonshot.cn", "icon": "🌙"},
+      {"name": "通义千问", "descZh": "阿里推出的AI对话模型", "descEn": "Alibaba AI conversational model", "url": "https://tongyi.aliyun.com", "icon": "💬"},
+      {"name": "腾讯元宝", "descZh": "腾讯AI助手，已接入DeepSeek", "descEn": "Tencent AI assistant with DeepSeek", "url": "https://yuanbao.tencent.com", "icon": "🪙"}
+    ]
+  },
+  {
+    "id": "ai-image",
+    "nameZh": "AI图像工具",
+    "nameEn": "AI Image Tools",
+    "tools": [
+      {"name": "Midjourney", "descZh": "顶级AI绘画工具", "descEn": "Top-tier AI art generation", "url": "https://www.midjourney.com", "icon": "🎨"},
+      {"name": "Stable Diffusion", "descZh": "开源AI图像生成模型", "descEn": "Open-source image generation", "url": "https://stability.ai", "icon": "🖼️"},
+      {"name": "即梦AI", "descZh": "剪映旗下AI文生图/视频", "descEn": "ByteDance text-to-image/video", "url": "https://dreamina.jianying.com", "icon": "✨"},
+      {"name": "堆友", "descZh": "阿里出品，专业版SD免安装", "descEn": "Alibaba SD platform, no install", "url": "https://www.duiyou.cn", "icon": "🎯"},
+      {"name": "LiblibAI", "descZh": "国内最火AI绘画社区", "descEn": "Popular Chinese AI art community", "url": "https://www.liblib.art", "icon": "🔥"},
+      {"name": "Remove.bg", "descZh": "AI一键抠图工具", "descEn": "AI background removal", "url": "https://www.remove.bg", "icon": "✂️"}
+    ]
+  },
+  {
+    "id": "ai-coding",
+    "nameZh": "AI编程工具",
+    "nameEn": "AI Coding",
+    "tools": [
+      {"name": "GitHub Copilot", "descZh": "GitHub出品的AI编程助手", "descEn": "AI pair programmer by GitHub", "url": "https://github.com/features/copilot", "icon": "👨‍💻"},
+      {"name": "Claude Code", "descZh": "Anthropic的AI编程代理", "descEn": "Anthropic AI coding agent", "url": "https://claude.ai", "icon": "🧑‍💻"},
+      {"name": "Cursor", "descZh": "AI原生代码编辑器", "descEn": "AI-native code editor", "url": "https://cursor.sh", "icon": "📝"},
+      {"name": "Trae", "descZh": "字节跳动AI编程IDE", "descEn": "ByteDance AI coding IDE", "url": "https://www.trae.ai", "icon": "⚡"},
+      {"name": "Windsurf", "descZh": "Codeium出品的AI IDE", "descEn": "AI IDE by Codeium", "url": "https://codeium.com/windsurf", "icon": "🌊"},
+      {"name": "v0.dev", "descZh": "Vercel出品的UI生成工具", "descEn": "UI generation by Vercel", "url": "https://v0.dev", "icon": "🖌️"}
+    ]
+  },
+  {
+    "id": "ai-video",
+    "nameZh": "AI视频工具",
+    "nameEn": "AI Video",
+    "tools": [
+      {"name": "Sora", "descZh": "OpenAI文本生成视频", "descEn": "OpenAI text-to-video model", "url": "https://sora.com", "icon": "🎬"},
+      {"name": "Runway", "descZh": "专业AI视频编辑平台", "descEn": "Professional AI video platform", "url": "https://runwayml.com", "icon": "🎥"},
+      {"name": "可灵AI", "descZh": "快手AI视频生成", "descEn": "Kuaishou AI video generation", "url": "https://kling.kuaishou.com", "icon": "🎞️"},
+      {"name": "HeyGen", "descZh": "AI数字人视频制作", "descEn": "AI digital avatars", "url": "https://www.heygen.com", "icon": "👤"},
+      {"name": "剪映", "descZh": "抖音官方视频剪辑，含AI功能", "descEn": "Official CapCut with AI", "url": "https://www.capcut.cn", "icon": "✂️"},
+      {"name": "Pika", "descZh": "新一代AI视频生成平台", "descEn": "Next-gen AI video platform", "url": "https://pika.art", "icon": "🐰"}
+    ]
+  },
+  {
+    "id": "ai-office",
+    "nameZh": "AI办公工具",
+    "nameEn": "AI Office",
+    "tools": [
+      {"name": "Notion AI", "descZh": "AI驱动的笔记和文档工具", "descEn": "AI-powered notes & docs", "url": "https://www.notion.so", "icon": "📋"},
+      {"name": "Gamma", "descZh": "AI一键生成精美PPT", "descEn": "AI presentation maker", "url": "https://gamma.app", "icon": "📊"},
+      {"name": "AiPPT", "descZh": "AI自动生成PPT", "descEn": "AI auto PPT generation", "url": "https://www.aippt.cn", "icon": "📈"},
+      {"name": "飞书", "descZh": "字节办公套件，内置AI", "descEn": "ByteDance office suite with AI", "url": "https://www.feishu.cn", "icon": "🕊️"},
+      {"name": "钉钉", "descZh": "阿里办公平台，AI助手", "descEn": "Alibaba workplace with AI", "url": "https://www.dingtalk.com", "icon": "📌"},
+      {"name": "讯飞智文", "descZh": "AI一键生成PPT/Word", "descEn": "AI PPT and Word generation", "url": "https://zhiwen.xfyun.cn", "icon": "📄"}
+    ]
+  },
+  {
+    "id": "ai-audio",
+    "nameZh": "AI音频工具",
+    "nameEn": "AI Audio",
+    "tools": [
+      {"name": "Suno", "descZh": "AI音乐生成，输入文字出歌曲", "descEn": "AI music from text prompts", "url": "https://suno.com", "icon": "🎵"},
+      {"name": "ElevenLabs", "descZh": "最自然的AI语音合成", "descEn": "Most natural AI voice synthesis", "url": "https://elevenlabs.io", "icon": "🔊"},
+      {"name": "音述AI", "descZh": "AI音乐创作社区", "descEn": "AI music creation community", "url": "https://www.yinshu.me", "icon": "🎶"},
+      {"name": "Udio", "descZh": "高质量AI音乐生成", "descEn": "High-quality AI music", "url": "https://www.udio.com", "icon": "🎹"},
+      {"name": "剪映配音", "descZh": "AI文本转语音配音", "descEn": "AI text-to-speech dubbing", "url": "https://www.capcut.cn", "icon": "🎙️"},
+      {"name": "Otter.ai", "descZh": "AI会议记录和转录", "descEn": "AI meeting transcription", "url": "https://otter.ai", "icon": "🎧"}
+    ]
+  }
+]
