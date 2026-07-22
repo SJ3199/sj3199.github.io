@@ -13,7 +13,7 @@ import Layout from "@/layouts/Layout.astro";
       </p>
     </div>
 
-    <div class="grid gap-6 grid-cols-1 sm:grid-cols-3 max-w-5xl mx-auto">
+    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
       <!-- 图片压缩 -->
       <a href="/tools/compress" class="group rounded-2xl border border-neutral-200 bg-white/80 p-6 transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 dark:border-neutral-700 dark:bg-neutral-900/80 dark:hover:border-primary/40">
         <div class="flex items-start gap-4">
@@ -52,6 +52,27 @@ import Layout from "@/layouts/Layout.astro";
           </div>
         </div>
       </a>
+
+      <!-- FrameGrab -->
+      <div class="group rounded-2xl border border-neutral-200 bg-white/80 p-6 transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 dark:border-neutral-700 dark:bg-neutral-900/80 dark:hover:border-primary/40 flex flex-col">
+        <div class="flex items-start gap-4 flex-1">
+          <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-amber-50 text-2xl dark:bg-amber-950">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-amber-600 dark:text-amber-400"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><polyline points="7 10 10 7 13 10 17 6"/></svg>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-lg font-semibold text-neutral-800 dark:text-neutral-200">FrameGrab</h3>
+            <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">右键视频文件，直接导出首帧或末帧为无损 PNG 图片。支持常见视频格式，无需打开播放器。</p>
+          </div>
+        </div>
+        <div class="flex gap-2 mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-800">
+          <a href="https://github.com/SJ3199/FrameGrab" target="_blank" rel="noopener noreferrer" class="flex-1 text-center px-3 py-2 text-xs font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+            项目主页
+          </a>
+          <a href="https://github.com/SJ3199/FrameGrab/raw/master/FrameGrab-v3.0-Setup.exe" download class="flex-1 text-center px-3 py-2 text-xs font-medium rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm">
+            下载 v3.0
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </Layout>
