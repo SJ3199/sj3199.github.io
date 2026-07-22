@@ -136,7 +136,7 @@ const experiences = [
         <div class="space-y-4">
           {experiences.map((exp, i) => (
             <div class="exp-card rounded-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 overflow-hidden" data-aos="fade-up-xs" data-aos-delay={200 + (i * 100)} data-aos-duration="500" data-aos-once="true">
-              <button class="exp-toggle w-full flex items-center justify-between p-5 sm:p-6 text-left hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors" aria-expanded={i === 0 ? "true" : "false"}>
+              <button class="exp-toggle w-full flex items-center justify-between p-5 sm:p-6 text-left hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors" aria-expanded="false">
                 <div>
                   <h3 class="text-lg font-semibold text-neutral-800 dark:text-neutral-100"><span data-i18n={exp._cKey}>{exp.company}</span></h3>
                   <div class="text-sm text-neutral-500 dark:text-neutral-400 mt-1"><span data-i18n={exp._rKey}>{exp.role}</span> · <span data-i18n={exp._pKey}>{exp.period}</span> · <span data-i18n={exp._dKey}>{exp.dept}</span></div>
@@ -206,12 +206,4 @@ const experiences = [
       // Auto-open first card by default
     });
   });
-
-  // Expand first card by default
-  const firstContent = document.querySelector('.exp-card .exp-content');
-  const firstArrow = document.querySelector('.exp-card .exp-arrow');
-  if (firstContent && firstArrow) {
-    firstContent.classList.remove('hidden');
-    firstArrow.classList.add('rotate-180');
-  }
 </script>
