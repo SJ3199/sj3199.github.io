@@ -25,6 +25,12 @@ const i18n = {
     'social-xiaohongshu': '小红书',
     'social-wechat': '微信',
     'social-github': 'GitHub',
+    'social-douyin': '抖音',
+    'label-wechat-id': '微信号',
+    'label-douyin-id': '抖音ID',
+    'toast-copied': '已复制',
+    'qr-alt-wechat': '微信二维码',
+    'qr-alt-douyin': '抖音二维码',
     'intro-title': '关于我 ↓',
     'intro-name': '邵将',
     'intro-initial': '邵',
@@ -221,6 +227,12 @@ const i18n = {
     'social-xiaohongshu': 'Xiaohongshu',
     'social-wechat': 'WeChat',
     'social-github': 'GitHub',
+    'social-douyin': 'Douyin',
+    'label-wechat-id': 'WeChat ID',
+    'label-douyin-id': 'Douyin ID',
+    'toast-copied': 'Copied',
+    'qr-alt-wechat': 'WeChat QR Code',
+    'qr-alt-douyin': 'Douyin QR Code',
     'intro-title': 'About Me ↓',
     'intro-name': 'MajorSam',
     'intro-initial': 'M',
@@ -398,6 +410,16 @@ function getLang() {
   return localStorage.getItem('lang') || 'zh';
 }
 
+function t(key) {
+  const lang = getLang();
+  return (i18n[lang] || i18n.zh)[key] || key;
+}
+
+// Expose globally for inline scripts
+window.i18n = i18n;
+window.getLang = getLang;
+window.t = t;
+
 function setLang(lang) {
   localStorage.setItem('lang', lang);
   applyLang(lang);
@@ -409,6 +431,11 @@ function applyLang(lang) {
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
     const key = el.getAttribute('data-i18n');
     if (t[key]) el.textContent = t[key];
+  });
+
+  document.querySelectorAll('[data-i18n-alt]').forEach(function(el) {
+    const key = el.getAttribute('data-i18n-alt');
+    if (t[key]) el.setAttribute('alt', t[key]);
   });
 
   document.querySelectorAll('[data-i18n-html]').forEach(function(el) {

@@ -12,17 +12,17 @@ const filteredSocial = displaySocialIds.length > 0
     {filteredSocial.map((item, index) => (
       <div class="social-item-outer" style={`--i: ${index}; --t: ${filteredSocial.length};`}>
         {item.name === "WeChat" ? (
-          <div class="social-item qr-trigger" data-copy="SJ664487637" data-label="微信号">
+          <div class="social-item qr-trigger" data-copy="SJ664487637" data-i18n-label="label-wechat-id">
             <img src={item.image} alt={item.name} class="social-image" />
             <div class="qr-popup">
-              <img src="/assets/social/wechat-qr.png" alt="微信二维码" class="qr-img" />
+              <img src="/assets/social/wechat-qr.png" alt="微信二维码" data-i18n-alt="qr-alt-wechat" class="qr-img" />
             </div>
           </div>
         ) : item.name === "抖音" ? (
-          <div class="social-item qr-trigger" data-copy="96105575" data-label="抖音ID">
+          <div class="social-item qr-trigger" data-copy="96105575" data-i18n-label="label-douyin-id">
             <img src={item.image} alt={item.name} class="social-image" />
             <div class="qr-popup">
-              <img src="/assets/social/douyin-qr.png" alt="抖音二维码" class="qr-img" />
+              <img src="/assets/social/douyin-qr.png" alt="抖音二维码" data-i18n-alt="qr-alt-douyin" class="qr-img" />
             </div>
           </div>
         ) : (
@@ -163,7 +163,7 @@ const filteredSocial = displaySocialIds.length > 0
   document.querySelectorAll('.qr-trigger').forEach((trigger) => {
     const el = trigger as HTMLElement;
     const copyId = el.dataset.copy || '';
-    const label = el.dataset.label || '';
+    const labelKey = el.dataset.i18nLabel || '';
 
     // Click → copy to clipboard (both desktop & mobile)
     el.addEventListener('click', async (e) => {
@@ -182,7 +182,7 @@ const filteredSocial = displaySocialIds.length > 0
       }
       const toast = document.getElementById('copy-toast');
       if (toast) {
-        toast.textContent = '已复制' + label + ': ' + copyId;
+        toast.textContent = (window.t ? window.t('toast-copied') : '已复制') + ' ' + (labelKey && window.t ? window.t(labelKey) : 'WeChat') + ': ' + copyId;
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 2000);
       }
