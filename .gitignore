@@ -42,3 +42,13 @@ Thumbs.db
 
 # wrangler state
 .wrangler/
+
+# R2 upload scripts (contain credential patterns — use .env instead)
+_r2_upload.cjs
+_r2_wrangler.cjs
+
+# Generated outputs (contain CDN paths)
+_cdn_base.txt
+_cdn_map.json
+_cdn_rename_map.json
+_migration_report.json
