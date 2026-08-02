@@ -69,5 +69,31 @@ import Layout from "@/layouts/Layout.astro";
       </div>
 
     </div>
+
+    <!-- AI 辅助创建的网页 -->
+    <div class="text-center mt-16 mb-8">
+      <h2 class="font-sans text-2xl font-bold tracking-normal text-neutral-900 dark:text-white sm:text-3xl">
+        AI<span class="text-primary dark:text-primary-light" data-i18n="web-page-title">辅助创建的网页</span>
+      </h2>
+      <p class="mx-auto mt-3 max-w-xl text-sm text-neutral-600 dark:text-neutral-400" data-i18n="web-page-desc">
+        AI 辅助设计与开发的可交互网页项目
+      </p>
+    </div>
+
+    <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto">
+
+      <!-- AI-Galaxy -->
+      <div class="group flex flex-col items-center text-center rounded-2xl border border-neutral-200 bg-white/80 p-6 sm:p-7 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 dark:border-neutral-700 dark:bg-neutral-900/80 dark:hover:border-primary/30">
+        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 dark:bg-indigo-950 mb-4">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-indigo-600 dark:text-indigo-400"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg>
+        </div>
+        <h3 class="text-base font-semibold text-neutral-800 dark:text-neutral-200 mb-1.5">AI-Galaxy</h3>
+        <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed mb-4" data-i18n-html="tool-galaxy-desc">可交互的 AI 知识星图<br/>从熟悉的名字出发，探索 AI 宇宙</p>
+        <a href="https://ai-galaxy.shaojiang3199.workers.dev/" target="_blank" rel="noopener noreferrer" class="mt-auto w-1/2 text-center px-3 py-2 text-xs font-medium rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm" data-i18n="tool-galaxy-visit">
+          立即探索
+        </a>
+      </div>
+
+    </div>
   </div>
 </Layout>
