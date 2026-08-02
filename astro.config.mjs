@@ -13,7 +13,7 @@ const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://sj3199.github.io';
 // https://astro.build/config
 export default defineConfig({
   site: siteUrl,
-  base: '/Sam-Portfolio/',
+  base: '/',
   envPrefix: 'PUBLIC_',
 
   vite: {
