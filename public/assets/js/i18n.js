@@ -83,6 +83,13 @@ const i18n = {
     'tool-card-convert-desc': 'JPG / PNG / WebP / BMP 互转<br/>纯浏览器端处理，极速转换',
     'tool-card-resize-title': '尺寸调整',
     'tool-card-resize-desc': '批量调整图片尺寸<br/>支持 4K / 2K / 1080p 预设',
+    // AI-Galaxy
+    'tool-galaxy-title': 'AI-Galaxy',
+    'tool-galaxy-desc': '可交互的 AI 知识星图<br/>从熟悉的名字出发，探索 AI 宇宙',
+    'tool-galaxy-visit': '立即探索',
+    // AI 辅助创建的网页
+    'web-page-title': '辅助创建的网页',
+    'web-page-desc': 'AI 辅助设计与开发的可交互网页项目',
     'intro-skill-ai-dev': 'AI 辅助开发',
     'intro-skill-ai-visual': 'AI 视觉生成',
     'intro-skill-ai-workflow': 'AI 工作流集成',
@@ -285,6 +292,13 @@ const i18n = {
     'tool-card-convert-desc': 'Convert between JPG / PNG / WebP / BMP<br/>Pure browser-side, lightning fast',
     'tool-card-resize-title': 'Image Resize',
     'tool-card-resize-desc': 'Batch resize images with precision<br/>4K / 2K / 1080p presets available',
+    // AI-Galaxy
+    'tool-galaxy-title': 'AI-Galaxy',
+    'tool-galaxy-desc': 'Interactive AI knowledge star map<br/>Start from a familiar name, explore the AI universe',
+    'tool-galaxy-visit': 'Explore',
+    // AI-assisted Web Pages
+    'web-page-title': 'Web Pages',
+    'web-page-desc': 'AI-assisted interactive web page projects',
     'intro-skill-ai-dev': 'AI-Assisted Development',
     'intro-skill-ai-visual': 'AI Visual Generation',
     'intro-skill-ai-workflow': 'AI Workflow Integration',
@@ -440,7 +454,7 @@ function applyLang(lang) {
 
   document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
     const key = el.getAttribute('data-i18n-html');
-    if (t[key]) el.textContent = t[key];
+    if (t[key]) el.innerHTML = t[key];
   });
 
   function updateMenuText() {
