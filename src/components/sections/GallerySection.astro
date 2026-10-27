@@ -26,7 +26,7 @@ let globalIndex = 0;
 const itemGlobalIndex: Map<any, number> = new Map();
 for (const item of galleryItems) { itemGlobalIndex.set(item, globalIndex++); }
 
-// Preload first 12 images per category so all 3-column rows load fast
+// Preload the first 12 images per category for the initial gallery rows.
 const preloadImages: string[] = [];
 for (const cat of categories) {
   const items = itemsByCategory[cat] || [];
@@ -71,8 +71,8 @@ const uniquePreload = [...new Set(preloadImages)];
             <div class="gallery-grid">
               {items.map((item, idx) => {
                 const imgSrc = item.image;
-                // First 3 images per category get eager loading + high priority
-                const isPrioritized = idx < 3;
+                // Prioritize the complete first row at each category's widest layout.
+                const isPrioritized = idx < 4;
                 return (
                 <article
                   class="gallery-item group cursor-pointer"
@@ -167,14 +167,17 @@ const uniquePreload = [...new Set(preloadImages)];
   /* CSS Grid: guaranteed left→right, top→bottom ordering at every breakpoint */
   .gallery-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
   }
   @media (min-width: 640px) {
-    .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .gallery-grid { gap: 1.5rem; }
   }
   @media (min-width: 1024px) {
-    .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (min-width: 1280px) {
+    .gallery-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   }
 
   .gallery-item {
