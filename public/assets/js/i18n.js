@@ -1,6 +1,12 @@
 // i18n translations v2 - Portfolio Site
 const i18n = {
   zh: {
+    'ai-confirm-download-title': '下载高清原图？',
+    'ai-cancel': '取消',
+    'ai-confirm-download': '确认下载',
+    'ai-pure-wallpaper': '纯壁纸',
+    'ai-lock-screen': '锁屏',
+    'ai-passcode-screen': '密码',
     'ai-empty-gallery': '暂无图片',
     "ai-gallery-title": "AI 图集",
     "ai-home-desc": "AI 场景 · 手机壁纸 · 高清原图下载",
@@ -20,7 +26,7 @@ const i18n = {
     "ai-format": "原始格式",
     "ai-file-size": "文件大小",
     "ai-download-btn": "下载高清原图",
-    "ai-original-note": "下载的是原始文件，尺寸、格式和文件内容保持不变。",
+    "ai-original-note": "保留原始尺寸与画质",
     "ai-no-original": "这张作品暂未提供原图下载。",
     "ai-download-started": "已请求高清原图，请在浏览器下载列表中查看保存进度。",
     resume: '简历',
@@ -235,6 +241,12 @@ const i18n = {
     'tool-alert-pack-fail': '打包失败，请逐张下载',
   },
   en: {
+    'ai-confirm-download-title': 'Download original?',
+    'ai-cancel': 'Cancel',
+    'ai-confirm-download': 'Download',
+    'ai-pure-wallpaper': 'Wallpaper',
+    'ai-lock-screen': 'Lock screen',
+    'ai-passcode-screen': 'Passcode',
     'ai-empty-gallery': 'No images yet',
     "ai-gallery-title": "AI Gallery",
     "ai-home-desc": "AI scenes · Texture wallpapers · Original downloads",
@@ -254,7 +266,7 @@ const i18n = {
     "ai-format": "Original format",
     "ai-file-size": "File size",
     "ai-download-btn": "Download original",
-    "ai-original-note": "The original file retains its dimensions, format and content.",
+    "ai-original-note": "Original dimensions and quality",
     "ai-no-original": "An original download is not available for this artwork.",
     "ai-download-started": "Original requested. Check your browser downloads for progress.",
     resume: 'Resume',
