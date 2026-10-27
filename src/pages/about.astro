@@ -1,144 +1,244 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import Layout from '@/layouts/Layout.astro';
+import ProjectTools from '@/components/home/ProjectTools.astro';
+import { skills } from '@/collections/ai-projects';
+import { ArrowUpRight, ArrowRight, Github, Maximize2, X, Download } from '@lucide/astro';
 ---
 
-<Layout title="AI工具 / AI Tools">
-  <div class="site-container mx-auto pt-8 md:pt-12 pb-16 md:pb-24">
-    <!-- AI-Galaxy -->
-    <div class="text-center mb-8">
-      <h1 class="font-sans text-3xl font-bold tracking-normal text-neutral-900 dark:text-white sm:text-4xl" data-i18n="tool-galaxy-title">AI-Galaxy</h1>
-      <p class="mx-auto mt-3 max-w-xl text-sm text-neutral-600 dark:text-neutral-400" data-i18n-html="tool-galaxy-desc">可交互的 AI 知识星图<br/>从熟悉的名字出发，探索 AI 宇宙</p>
-    </div>
+<Layout title="AI 项目 · Sam Portfolio" description="AI-Galaxy、Codex Skills 与实用工具：用 AI 将设计想法变成可复用的作品和工具。">
+  <div class="projects-page site-container">
+    <header class="projects-heading">
+      <h1 class="font-sans text-4xl sm:text-5xl font-bold tracking-normal" data-i18n="projects-title">AI 项目</h1>
+      <nav class="project-nav" aria-label="项目分类">
+        <a href="#galaxy" data-i18n="projects-nav-site">网站项目</a><span aria-hidden="true">/</span>
+        <a href="#skills">Codex Skills</a><span aria-hidden="true">/</span>
+        <a href="#tools" data-i18n="projects-tools-title">实用工具</a>
+      </nav>
+    </header>
 
-    <!-- AI-Galaxy 大卡片 -->
-    <div class="max-w-6xl mx-auto">
-      <div class="rounded-2xl border border-neutral-200 bg-white/80 overflow-hidden transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 dark:border-neutral-700 dark:bg-neutral-900/80 dark:hover:border-primary/30">
-        <!-- 可交互的 iframe 嵌入 -->
-        <div id="galaxy-frame-wrapper" class="relative w-full" style="aspect-ratio: 1920/953;">
-          <iframe
-            src="https://ai-galaxy.shaojiang3199.workers.dev/"
-            class="absolute inset-0 w-full h-full border-0"
-            loading="lazy"
-            title="AI-Galaxy"
-            sandbox="allow-scripts allow-same-origin allow-popups"
-          ></iframe>
+    <section id="galaxy" class="galaxy-project" aria-labelledby="galaxy-title">
+      <div class="galaxy-copy">
+        <span class="eyebrow">WEBSITE / 01</span>
+        <h2 id="galaxy-title">AI-Galaxy</h2>
+        <p class="galaxy-subtitle" data-i18n="projects-galaxy-subtitle">把 AI 世界，连成一片星图。</p>
+        <p class="galaxy-description" data-i18n="projects-galaxy-desc">用星体与连线呈现 AI 模型、应用和平台。从一个熟悉的名字出发，探索它们之间的关系。</p>
+        <div class="project-actions">
+          <a class="project-button primary" href="https://ai-galaxy.shaojiang3199.workers.dev/" target="_blank" rel="noopener noreferrer"><span data-i18n="projects-visit">访问网站</span><ArrowUpRight size={17}/></a>
+          <a class="text-link" href="https://github.com/SJ3199/AI-Galaxy-Map" target="_blank" rel="noopener noreferrer"><Github size={16}/><span>GitHub</span><ArrowUpRight size={14}/></a>
         </div>
-        <!-- 底部信息 -->
-        <div class="flex items-center justify-between px-6 py-5 border-t border-neutral-100 dark:border-neutral-800">
-          <div>
-            <h3 class="text-lg font-semibold text-neutral-800 dark:text-neutral-200">AI-Galaxy</h3>
-            <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400" data-i18n-html="tool-galaxy-desc">可交互的 AI 知识星图<br/>从熟悉的名字出发，探索 AI 宇宙</p>
+      </div>
+      <a class="galaxy-art" href="https://ai-galaxy.shaojiang3199.workers.dev/" target="_blank" rel="noopener noreferrer" aria-label="访问 AI-Galaxy 星图网站">
+        <img src="/assets/projects/galaxy.webp" alt="AI-Galaxy 的星体与关系星图静态封面" width="1400" height="695" fetchpriority="high" />
+        <div class="galaxy-art-caption"><span>AI ECOSYSTEM, CONNECTED.</span><span class="art-open"><ArrowUpRight size={20}/></span></div>
+      </a>
+    </section>
+
+    <section id="skills" class="project-section" aria-labelledby="skills-title">
+      <div class="section-intro"><div><span class="eyebrow">REUSABLE WORKFLOWS</span><h2 id="skills-title">Codex Skills</h2></div><p data-i18n="projects-skills-desc">把创作经验，变成可重复使用的工作流。</p></div>
+      <div class="skills-grid">
+        {skills.map(skill=><article class="skill-card">
+          <button class="skill-cover" type="button" data-skill-open={skill.id} aria-label={`查看${skill.name}的功能与示范`}>
+            <div class="sample-trio">{skill.images.map(image=><span class="sample-frame" style={`--image-ratio:${image.width / image.height}`}><img src={image.src} alt={image.alt} loading="lazy" decoding="async" width={image.width} height={image.height} /></span>)}</div>
+            <span class="cover-open" aria-hidden="true"><Maximize2 size={15}/></span>
+          </button>
+          <div class="skill-copy">
+            <div class="skill-title-row"><h3 data-i18n={`projects-${skill.id}-name`}>{skill.name}</h3><span class:list={['skill-status',{'is-local':skill.local}]}><span class="status-dot"/><span data-i18n={skill.local?'projects-local':'projects-open-source'}>{skill.local?'本地 Skill':'开源 Skill'}</span></span></div>
+            <p class="skill-description" data-i18n={`projects-${skill.id}-desc`}>{skill.description}</p>
+            <ul class="skill-features">{skill.features.map((feature,index)=><li data-i18n={`projects-${skill.id}-feature-${index}`}>{feature}</li>)}</ul>
+            <div class="skill-actions">
+              <button type="button" class="text-link" data-skill-open={skill.id}><span data-i18n="projects-details">功能与示范</span><ArrowRight size={16}/></button>
+              {skill.repo?<a class="text-link" href={skill.repo} target="_blank" rel="noopener noreferrer"><Github size={16}/><span>GitHub</span><ArrowUpRight size={14}/></a>:<span class="repo-pending" data-i18n="projects-repo-pending">仓库尚未公开</span>}
+            </div>
           </div>
-          <a href="https://ai-galaxy.shaojiang3199.workers.dev/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium text-primary dark:text-primary-light hover:underline transition-all">
-            <span data-i18n="tool-galaxy-visit">立即探索</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-        </div>
+        </article>)}
       </div>
-    </div>
+    </section>
 
-    <div class="text-center mt-16 mb-8">
-      <h2 class="font-sans text-2xl font-bold tracking-normal text-neutral-900 dark:text-white sm:text-3xl">
-        AI<span class="text-primary dark:text-primary-light" data-i18n="tool-page-title">辅助创建的工具</span>
-      </h2>
-      <p class="mx-auto mt-3 max-w-xl text-sm text-neutral-600 dark:text-neutral-400" data-i18n="tool-page-desc">
-        AI 辅助开发的实用工具，本地处理，即开即用
-      </p>
-    </div>
-
-    <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
-
-      <!-- 图片压缩 -->
-      <div class="group flex flex-col items-center text-center rounded-2xl border border-neutral-200 bg-white/80 p-6 sm:p-7 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 dark:border-neutral-700 dark:bg-neutral-900/80 dark:hover:border-primary/30">
-        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 dark:bg-blue-950 mb-4">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-blue-600 dark:text-blue-400"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        </div>
-        <h3 class="text-base font-semibold text-neutral-800 dark:text-neutral-200 mb-1.5" data-i18n="tool-card-compress-title">图片压缩</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed mb-4" data-i18n-html="tool-card-compress-desc">智能压缩引擎，自动优化体积<br/>支持 JPG / PNG / WebP 格式</p>
-        <a href="/tools/compress" class="mt-auto w-1/2 text-center px-3 py-2 text-xs font-medium rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm" data-i18n="tool-btn-use">
-          立即使用
-        </a>
-      </div>
-
-      <!-- 格式转换 -->
-      <div class="group flex flex-col items-center text-center rounded-2xl border border-neutral-200 bg-white/80 p-6 sm:p-7 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 dark:border-neutral-700 dark:bg-neutral-900/80 dark:hover:border-primary/30">
-        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-green-50 dark:bg-green-950 mb-4">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-green-600 dark:text-green-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-        </div>
-        <h3 class="text-base font-semibold text-neutral-800 dark:text-neutral-200 mb-1.5" data-i18n="tool-card-convert-title">格式转换</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed mb-4" data-i18n-html="tool-card-convert-desc">JPG / PNG / WebP / BMP 互转<br/>纯浏览器端处理，极速转换</p>
-        <a href="/tools/convert" class="mt-auto w-1/2 text-center px-3 py-2 text-xs font-medium rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm" data-i18n="tool-btn-use">
-          立即使用
-        </a>
-      </div>
-
-      <!-- 尺寸调整 -->
-      <div class="group flex flex-col items-center text-center rounded-2xl border border-neutral-200 bg-white/80 p-6 sm:p-7 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 dark:border-neutral-700 dark:bg-neutral-900/80 dark:hover:border-primary/30">
-        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-purple-50 dark:bg-purple-950 mb-4">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-purple-600 dark:text-purple-400"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
-        </div>
-        <h3 class="text-base font-semibold text-neutral-800 dark:text-neutral-200 mb-1.5" data-i18n="tool-card-resize-title">尺寸调整</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed mb-4" data-i18n-html="tool-card-resize-desc">批量调整图片尺寸<br/>支持 4K / 2K / 1080p 预设</p>
-        <a href="/tools/resize" class="mt-auto w-1/2 text-center px-3 py-2 text-xs font-medium rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm" data-i18n="tool-btn-use">
-          立即使用
-        </a>
-      </div>
-
-      <!-- FrameGrab -->
-      <div class="group flex flex-col items-center text-center rounded-2xl border border-neutral-200 bg-white/80 p-6 sm:p-7 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 dark:border-neutral-700 dark:bg-neutral-900/80 dark:hover:border-primary/30">
-        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-white dark:bg-neutral-800 mb-4 p-1.5">
-          <img src="/assets/framegrab-logo.png" alt="FrameGrab" class="w-full h-full object-contain" />
-        </div>
-        <h3 class="text-base font-semibold text-neutral-800 dark:text-neutral-200 mb-1.5" data-i18n="tool-framegrab-title">FrameGrab</h3>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed mb-4" data-i18n-html="tool-framegrab-desc">右键视频导出首/末帧 JPG<br/>AI 辅助开发，本地运行</p>
-        <div class="flex gap-2 w-full mt-auto">
-          <a href="https://github.com/SJ3199/FrameGrab" target="_blank" rel="noopener noreferrer" class="flex-1 text-center px-2 py-2 text-xs font-medium rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm" data-i18n="tool-framegrab-home">
-            项目主页
-          </a>
-          <a href="https://github.com/SJ3199/FrameGrab/raw/master/FrameGrab-v3.0-Setup.exe" download class="flex-1 text-center px-2 py-2 text-xs font-medium rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm" data-i18n="tool-framegrab-download">
-            下载安装
-          </a>
-        </div>
-      </div>
-
-    </div>
+    <section id="tools" class="project-section tools-section" aria-labelledby="tools-title">
+      <div class="section-intro"><div><span class="eyebrow">SMALL TOOLS, REAL USE</span><h2 id="tools-title" data-i18n="projects-tools-title">实用工具</h2></div><p data-i18n="projects-tools-desc">AI 辅助开发，处理日常的图片与视频工作。</p></div>
+      <ProjectTools/>
+    </section>
   </div>
+
+  {skills.map(skill=><dialog class="skill-dialog" id={`skill-${skill.id}`} aria-labelledby={`skill-title-${skill.id}`}>
+    <button type="button" class="dialog-close" data-skill-close aria-label="关闭示范"><X size={21}/></button>
+    <div class="dialog-heading"><span class="eyebrow">CODEX SKILL</span><h2 id={`skill-title-${skill.id}`} data-i18n={`projects-${skill.id}-name`}>{skill.name}</h2><p class="skill-command">{skill.command}</p></div>
+    <p class="dialog-description" data-i18n={`projects-${skill.id}-desc`}>{skill.description}</p>
+    <div class="demo-images">{skill.images.map((image,index)=><figure><div class="demo-image-frame" style={`--image-ratio:${image.width / image.height}`}><img src={image.src} alt={image.alt} loading="lazy" decoding="async" width={image.width} height={image.height}/></div><figcaption data-i18n={`projects-${skill.id}-image-${index}`}>{image.label}</figcaption></figure>)}</div>
+    <ol class="skill-workflow">{skill.steps.map((step,index)=><li><span class="step-number">0{index+1}</span><span data-i18n={`projects-${skill.id}-step-${index}`}>{step}</span></li>)}</ol>
+    <div class="dialog-footer"><p data-i18n={`projects-${skill.id}-note`}>{skill.note}</p><div class="project-actions">{skill.repo&&<a class="text-link" href={skill.repo} target="_blank" rel="noopener noreferrer"><Github size={16}/><span data-i18n="projects-repo">GitHub 仓库</span><ArrowUpRight size={14}/></a>}{skill.release&&<a class="project-button primary" href={skill.release} target="_blank" rel="noopener noreferrer"><Download size={16}/><span data-i18n="projects-download-skill">下载 / 安装</span></a>}</div></div>
+  </dialog>)}
 </Layout>
 
 <script>
-  // Isolate scroll: when mouse is over the Galaxy iframe, block outer page
-  // scroll so the iframe can handle wheel/zoom independently. Uses both
-  // overflow lock (blocks scrollbar scroll) and passive wheel capture.
-  (function() {
-    const wrapper = document.getElementById('galaxy-frame-wrapper');
-    if (!wrapper) return;
-
-    let inside = false;
-
-    function lock() {
-      if (!inside) {
-        inside = true;
-        document.documentElement.style.overflow = 'hidden';
-        document.body.style.overflow = 'hidden';
-      }
-    }
-
-    function unlock() {
-      if (inside) {
-        inside = false;
-        document.documentElement.style.overflow = '';
-        document.body.style.overflow = '';
-      }
-    }
-
-    wrapper.addEventListener('mouseenter', lock);
-    wrapper.addEventListener('mouseleave', unlock);
-
-    // Also capture wheel on the wrapper to prevent any scroll leak
-    wrapper.addEventListener('wheel', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }, { passive: false });
-  })();
+  let opener: HTMLElement | null = null;
+  document.querySelectorAll<HTMLButtonElement>('[data-skill-open]').forEach(button=>button.addEventListener('click',()=>{
+    const dialog=document.getElementById(`skill-${button.dataset.skillOpen}`) as HTMLDialogElement | null;
+    if(!dialog) return;
+    opener=button;
+    dialog.showModal();
+    document.documentElement.classList.add('skill-modal-open');
+  }));
+  document.querySelectorAll<HTMLDialogElement>('.skill-dialog').forEach(dialog=>{
+    dialog.querySelector('[data-skill-close]')?.addEventListener('click',()=>dialog.close());
+    dialog.addEventListener('click',event=>{if(event.target!==dialog) return;const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();});
+    dialog.addEventListener('close',()=>{document.documentElement.classList.remove('skill-modal-open');opener?.focus({preventScroll:true});});
+  });
 </script>
 
+
+<style>
+  .projects-page {
+    --project-ink: #19222f;
+    --project-muted: #677487;
+    --project-surface: rgba(255,255,255,.76);
+    --project-line: rgba(100,120,150,.2);
+    --sample-surface: #edf0f3;
+    padding-top: 28px;
+    padding-bottom: 64px;
+    max-width: 1232px;
+  }
+  :global(html.dark) .projects-page, :global(html.dark) .skill-dialog {
+    --project-ink: #edf2fb;
+    --project-muted: #9cafc9;
+    --project-surface: #101b2d;
+    --project-line: rgba(135,160,200,.17);
+    --sample-surface: #152232;
+  }
+  .projects-heading { text-align:center; margin-bottom:28px; }
+  .projects-heading h1 { margin:0; color:var(--color-primary); }
+  .project-nav { display:flex; justify-content:center; gap:18px; margin-top:16px; font-size:12px; color:var(--project-muted); }
+  .project-nav>span { opacity:.35; }
+  .project-nav a:hover { color:var(--color-primary); }
+  .eyebrow { display:block; font-size:10px; letter-spacing:.16em; font-weight:600; color:var(--project-muted); }
+
+  /* One continuous canvas: the star map dissolves into the copy area. */
+  .galaxy-project {
+    position:relative;
+    isolation:isolate;
+    border:1px solid rgba(129,159,206,.2);
+    border-radius:22px;
+    overflow:hidden;
+    background:radial-gradient(ellipse at 5% 0%,#152d4c 0%,transparent 65%),#050b15;
+    scroll-margin-top:100px;
+  }
+  .galaxy-copy { position:relative; z-index:1; width:49%; padding:30px 36px; }
+  .galaxy-copy .eyebrow { color:#8da6c8; }
+  .galaxy-copy h2 { font-size:34px; letter-spacing:-.03em; font-weight:650; color:#f0f5ff; margin:14px 0 6px; }
+  .galaxy-subtitle { font-size:17px; color:#d8e6fb; line-height:1.6; }
+  .galaxy-description { font-size:13px; line-height:1.8; color:#9fb3ce; max-width:355px; margin-top:12px; }
+  .project-actions { display:flex; align-items:center; gap:22px; flex-wrap:wrap; margin-top:22px; }
+  .project-button { display:inline-flex; align-items:center; justify-content:center; gap:12px; padding:10px 17px; border-radius:8px; font-size:12px; font-weight:550; min-height:40px; }
+  .primary { background:var(--color-primary); color:white; }
+  .primary:hover { background:var(--color-btn-primary-hover); }
+  .text-link { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-size:12px; font-weight:550; color:var(--color-primary); cursor:pointer; }
+  .text-link:hover { text-decoration:underline; text-underline-offset:4px; }
+  .galaxy-copy .text-link { color:#b7d2f9; }
+  .galaxy-art { position:absolute; top:0; bottom:0; right:0; width:76%; overflow:hidden; }
+  .galaxy-art>img {
+    width:100%; height:100%; object-fit:cover;
+    mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.1) 12%,#000 55%);
+    transition:transform .55s ease;
+  }
+  .galaxy-art:hover>img { transform:scale(1.025); }
+  .galaxy-art-caption { position:absolute; bottom:22px; right:24px; display:flex; gap:18px; align-items:center; color:#9cb6db; font-size:9px; letter-spacing:.15em; }
+  .art-open { display:grid; place-items:center; border:1px solid #6d87ac66; border-radius:50%; width:34px; height:34px; background:#0e192d66; }
+
+  .project-section { margin-top:40px; scroll-margin-top:100px; }
+  .section-intro { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:18px; }
+  .section-intro h2 { font-size:25px; font-weight:650; letter-spacing:-.025em; color:var(--project-ink); margin-top:6px; }
+  .section-intro>p { font-size:12px; color:var(--project-muted); line-height:1.8; margin-bottom:3px; }
+  .skills-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+  .skill-card { display:flex; flex-direction:column; min-width:0; border:1px solid var(--project-line); border-radius:16px; overflow:hidden; background:var(--project-surface); }
+  .skill-cover {
+    display:flex; align-items:center; justify-content:center; position:relative;
+    width:100%; aspect-ratio:2.25; padding:16px 24px;
+    background:var(--sample-surface); cursor:pointer; overflow:hidden;
+  }
+  .sample-trio { display:flex; justify-content:center; align-items:center; gap:12px; width:100%; height:100%; transition:transform .45s cubic-bezier(.2,.65,.3,1); }
+  .sample-frame { display:block; height:100%; aspect-ratio:var(--image-ratio); border-radius:10px; overflow:hidden; box-shadow:0 7px 16px #0003; }
+  .sample-frame img { display:block; width:100%; height:100%; object-fit:cover; }
+  .skill-cover:hover .sample-trio { transform:translateY(-2px); }
+  .cover-open { position:absolute; bottom:10px; right:10px; display:grid; place-items:center; width:29px; height:29px; background:#0b1220aa; border:1px solid #ffffff25; color:#e4ecfa; border-radius:8px; backdrop-filter:blur(8px); }
+  .skill-copy { padding:17px 22px 0; display:flex; flex-direction:column; flex:1; }
+  .skill-title-row { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .skill-title-row h3 { font-size:21px; font-weight:650; color:var(--project-ink); }
+  .skill-status { display:inline-flex; align-items:center; gap:6px; color:#328063; font-size:10px; white-space:nowrap; }
+  .status-dot { width:5px; height:5px; border-radius:50%; background:currentColor; }
+  .skill-status.is-local { color:var(--project-muted); }
+  :global(html.dark) .skill-status:not(.is-local) { color:#7dc9ab; }
+  .skill-description { font-size:13px; line-height:1.8; color:var(--project-muted); margin-top:8px; }
+  .skill-features { display:flex; flex-wrap:wrap; column-gap:14px; row-gap:5px; font-size:11px; line-height:1.7; color:var(--project-muted); margin:12px 0 14px; }
+  .skill-features li { display:flex; align-items:baseline; gap:6px; }
+  .skill-features li::before { content:''; width:3px; height:3px; border-radius:50%; background:var(--color-primary); flex-shrink:0; align-self:center; }
+  .skill-actions { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:auto; border-top:1px solid var(--project-line); padding:11px 0; }
+  .skill-actions>button { padding:7px 11px; border-radius:6px; background:var(--color-primary-bg); }
+  .repo-pending { font-size:10px; color:var(--project-muted); }
+
+  .skill-dialog { --project-ink:#19222f; --project-muted:#677487; --project-line:rgba(100,120,150,.22); position:fixed; inset:0; margin:auto; width:min(960px,calc(100vw - 36px)); max-height:calc(100svh - 48px); padding:30px; border:1px solid var(--project-line); border-radius:18px; background:#f8f7f3; color:var(--project-ink); overflow-y:auto; box-shadow:0 24px 90px #0006; }
+  :global(html.dark) .skill-dialog { background:#101b2d; }
+  .skill-dialog::backdrop { background:#030914c9; backdrop-filter:blur(8px); }
+  :global(html.skill-modal-open) { overflow:hidden; }
+  .dialog-close { position:absolute; right:16px; top:16px; display:grid; place-items:center; width:36px; height:36px; border:1px solid var(--project-line); border-radius:50%; color:var(--project-muted); cursor:pointer; }
+  .dialog-close:hover { color:var(--color-primary); }
+  .dialog-heading h2 { font-size:27px; font-weight:650; margin-top:9px; }
+  .skill-command { font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:10px; color:var(--project-muted); margin-top:5px; letter-spacing:.025em; }
+  .dialog-description { font-size:13px; color:var(--project-muted); line-height:1.8; margin:15px 42px 22px 0; }
+  .demo-images { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; max-width:720px; margin:auto; }
+  .demo-images figure { display:flex; flex-direction:column; align-items:center; min-width:0; margin:0; }
+  .demo-image-frame { width:100%; max-width:160px; aspect-ratio:var(--image-ratio); border-radius:10px; overflow:hidden; box-shadow:0 7px 16px #0002; }
+  .demo-image-frame img { display:block; width:100%; height:100%; object-fit:cover; }
+  .demo-images figcaption { text-align:center; font-size:11px; color:var(--project-muted); margin-top:9px; }
+  .skill-workflow { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:26px; padding-top:20px; border-top:1px solid var(--project-line); font-size:12px; }
+  .skill-workflow li { display:flex; gap:10px; align-items:center; }
+  .step-number { color:var(--color-primary); font-family:ui-monospace,monospace; font-size:11px; }
+  .dialog-footer { display:flex; justify-content:space-between; align-items:center; gap:20px; margin-top:22px; }
+  .dialog-footer>p { font-size:10px; line-height:1.8; color:var(--project-muted); max-width:390px; }
+  .dialog-footer .project-actions { margin-top:0; flex-shrink:0; gap:16px; }
+  .project-button:focus-visible,.text-link:focus-visible,.skill-cover:focus-visible,.dialog-close:focus-visible,.project-nav a:focus-visible,.galaxy-art:focus-visible { outline:2px solid var(--color-primary); outline-offset:-3px; }
+  @media(min-width:1600px) { .projects-page { max-width:1392px; } .galaxy-copy { padding:34px 40px; } }
+  @media(max-width:850px) {
+    .galaxy-copy { width:55%; padding:26px; }
+    .galaxy-copy h2 { font-size:31px; }
+    .galaxy-subtitle { font-size:15px; }
+    .galaxy-description { font-size:12px; }
+    .skills-grid { gap:18px; }
+    .skill-cover { padding:14px 18px; aspect-ratio:2.1; }
+    .sample-trio { gap:9px; }
+    .sample-frame { border-radius:9px; }
+    .skill-copy { padding:15px 18px 0; }
+    .skill-title-row h3 { font-size:20px; }
+    .skill-features { column-gap:10px; }
+    .section-intro { align-items:flex-start; flex-direction:column; gap:5px; }
+    .skill-dialog { padding:24px; }
+    .dialog-footer { align-items:flex-start; flex-direction:column; }
+    .skill-workflow { font-size:10px; gap:8px; }
+    .skill-workflow li { align-items:flex-start; gap:5px; }
+    .dialog-description { margin-right:0; }
+    .demo-images { gap:10px; }
+  }
+  @media(max-width:560px) {
+    .projects-page { padding-top:20px; padding-bottom:40px; }
+    .projects-heading { margin-bottom:24px; }
+    .project-nav { gap:13px; font-size:11px; }
+    .galaxy-copy { width:100%; padding:24px 24px 130px; }
+    .galaxy-copy h2 { font-size:30px; }
+    .galaxy-description { max-width:285px; }
+    .galaxy-art { top:30%; left:0; width:100%; opacity:.8; }
+    .galaxy-art>img { mask-image:linear-gradient(180deg,transparent 0%,#000 70%); }
+    .galaxy-art-caption { right:18px; bottom:18px; font-size:8px; }
+    .project-section { margin-top:30px; }
+    .section-intro h2 { font-size:24px; }
+    .skills-grid { grid-template-columns:1fr; gap:18px; }
+    .skill-cover { aspect-ratio:2.2; padding:13px 22px; }
+    .skill-copy { padding:15px 18px 0; }
+    .skill-features { margin:11px 0 12px; }
+    .skill-dialog { padding:22px 18px; width:calc(100vw - 24px); max-height:calc(100svh - 24px); }
+    .dialog-heading h2 { font-size:25px; }
+    .dialog-footer .project-actions { gap:15px; }
+    .demo-images { gap:7px; }
+    .skill-workflow li { flex-direction:column; gap:6px; }
+    .eyebrow { font-size:9px; }
+  }
+  @media(prefers-reduced-motion:reduce) { .sample-trio,.galaxy-art>img { transition:none; } .skill-cover:hover .sample-trio,.galaxy-art:hover>img { transform:none; } }
+</style>

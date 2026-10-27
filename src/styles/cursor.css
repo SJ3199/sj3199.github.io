@@ -1,0 +1,45 @@
+/* Native cursor bitmaps follow the OS pointer without a tracking overlay. */
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body,
+  .case-go {
+    cursor: url('/assets/cursors/blue-glow.png') 32 31, auto;
+  }
+
+  a[href],
+  button,
+  [role='button'],
+  [role='checkbox'],
+  [role='tab'],
+  summary,
+  select,
+  label[for],
+  input:is([type='button'], [type='submit'], [type='reset'], [type='checkbox'], [type='radio'], [type='file'], [type='range']) {
+    cursor: url('/assets/cursors/blue-glow-link.png') 32 31, pointer !important;
+  }
+
+  input:not([type]),
+  input:is([type='text'], [type='search'], [type='email'], [type='url'], [type='tel'], [type='password'], [type='number']),
+  textarea,
+  [contenteditable='true'] {
+    cursor: text !important;
+  }
+
+  :is(button, input, select, textarea):disabled,
+  [aria-disabled='true'] {
+    cursor: not-allowed !important;
+  }
+}
+
+@media (forced-colors: active) {
+  html,
+  body,
+  .case-go {
+    cursor: auto;
+  }
+  a[href], button, [role='button'], [role='checkbox'], [role='tab'], summary, select, label[for],
+  input:is([type='button'], [type='submit'], [type='reset'], [type='checkbox'], [type='radio'], [type='file'], [type='range']) {
+    cursor: pointer !important;
+  }
+  :is(button, input, select, textarea):disabled, [aria-disabled='true'] { cursor: not-allowed !important; }
+}

@@ -149,13 +149,6 @@ const {
     </p>
     </div>
     )}
-
-    <div class="cursor-indicator">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon">
-            <line x1="7" y1="17" x2="17" y2="7"></line>
-            <polyline points="7 7 17 7 17 17"></polyline>
-        </svg>
-    </div>
 </div>
 
 <style>
@@ -189,42 +182,6 @@ const {
     /* Hover style */
     .case-go {
         position: relative;
-    }
-
-    /* When custom cursor is active, hide default mouse */
-    .case-go.cursor-active {
-        cursor: none !important;
-    }
-
-    /* Use global style to hide default mouse */
-    html.cursor-hidden .case-go {
-        cursor: none !important;
-    }
-
-    .cursor-indicator {
-        position: absolute; /* Relative to parent container */
-        top: 0;
-        left: 0;
-        background-color: white;
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
-        z-index: 1000;
-        opacity: 0;
-        pointer-events: none;
-        transform: translate(-50%, -50%) scale(0.5);
-        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .arrow-icon {
-        color: var(--color-primary);
-        width: 24px;
-        height: 24px;
     }
 
     /* Limit the maximum movement range of parallax effect */
@@ -264,14 +221,12 @@ const {
         const webCase = document.querySelector('.web-case') as HTMLElement;
         const colorPicker = document.querySelector('.color-picker') as HTMLElement;
         const color = document.querySelector('.color') as HTMLElement;
-        const cursorIndicator = document.querySelector('.cursor-indicator') as HTMLElement;
         const caseGo = document.querySelector('.case-go') as HTMLElement;
-        const html = document.documentElement;
 
         // Check if on mobile device
         const isMobile = window.innerWidth < 768;
 
-        // If on mobile device, do not enable parallax and custom cursor effect
+        // If on mobile device, do not enable parallax
         if (isMobile) {
             return;
         }
@@ -284,14 +239,8 @@ const {
         // Global variables, used to store mouse position and animation state
         let mouseX = 0;
         let mouseY = 0;
-        let targetX = 0;
-        let targetY = 0;
-        let cursorX = 0;
-        let cursorY = 0;
-        let isHovering = false;
 
         // Smooth follow interpolation coefficient
-        const cursorEasing = 0.12;
         const parallaxEasing = 0.08;
 
         // Listen for global mouse movement - parallax effect
@@ -301,36 +250,7 @@ const {
             mouseY = (e.clientY / window.innerHeight) - 0.5;
         });
 
-        // Handle mouse events for clickable areas separately - custom cursor
         if (caseGo) {
-            // Mouse enters clickable area
-            caseGo.addEventListener('mouseenter', () => {
-                isHovering = true;
-                if (cursorIndicator) {
-                    cursorIndicator.style.opacity = '1';
-                    cursorIndicator.style.transform = 'translate(-50%, -50%) scale(1)';
-                }
-            });
-
-            // Mouse leaves clickable area
-            caseGo.addEventListener('mouseleave', () => {
-                isHovering = false;
-                if (cursorIndicator) {
-                    cursorIndicator.style.opacity = '0';
-                    cursorIndicator.style.transform = 'translate(-50%, -50%) scale(0.5)';
-                }
-            });
-
-                // Mouse moves in clickable area
-            caseGo.addEventListener('mousemove', (e: MouseEvent) => {
-                if (!isHovering) return;
-
-                // Get the position relative to the clickable area
-                const rect = caseGo.getBoundingClientRect();
-                targetX = e.clientX - rect.left;
-                targetY = e.clientY - rect.top;
-            });
-
             // Click event - scroll to gallery
             caseGo.addEventListener('click', () => {
                 const href = webCase?.getAttribute('data-href');
@@ -395,22 +315,6 @@ const {
             requestAnimationFrame(updateParallax);
         }
 
-        // Separate animation loop - custom cursor
-        function updateCursor() {
-            if (isHovering && cursorIndicator) {
-                // Smooth follow
-                cursorX += (targetX - cursorX) * cursorEasing;
-                cursorY += (targetY - cursorY) * cursorEasing;
-
-                cursorIndicator.style.left = `${cursorX}px`;
-                cursorIndicator.style.top = `${cursorY}px`;
-            }
-
-            requestAnimationFrame(updateCursor);
-        }
-
-        // Start two separate animation loops
         updateParallax();
-        updateCursor();
     });
 </script>

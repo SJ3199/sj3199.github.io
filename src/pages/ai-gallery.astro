@@ -14,6 +14,7 @@ const payload = JSON.stringify(items).replaceAll('<','\\u003c');
   <div class="ai-page site-container">
     <header class="ai-heading">
       <h1 class="font-sans text-4xl sm:text-5xl font-bold tracking-normal text-center" data-i18n="ai-gallery-title">AI 图集</h1>
+      <p class="ai-intro" data-i18n="ai-gallery-intro">源于视觉设计师的个人兴趣。本页图像均由自主设计的 AI 图像生成 Skill 完成。</p>
     </header>
     <div class="ai-toolbar">
       <div class="ai-tabs" role="group" aria-label="AI 图集分类">{tabs.map((tab,index)=><button type="button" class:list={['ai-tab',{active:index===0}]} data-filter={tab.key} aria-pressed={index===0?'true':'false'}><span data-i18n={tab.i18n}>{tab.name}</span></button>)}</div>
@@ -57,6 +58,7 @@ const payload = JSON.stringify(items).replaceAll('<','\\u003c');
   :global(html.dark) .ai-page,:global(html.dark) .ai-detail{--color-text-secondary:var(--color-text-secondary-dark);--color-text-tertiary:var(--color-text-tertiary-dark);--color-primary:var(--color-text-primary-dark)}
   .ai-page{padding-top:20px;padding-bottom:24px;min-height:calc(100svh - 170px)}
   .ai-heading{text-align:center;margin-bottom:10px}.ai-heading h1{margin:0}
+  .ai-intro{max-width:960px;margin:10px auto 14px;font-size:12px;line-height:1.85;color:var(--color-text-tertiary);text-wrap:pretty}
   .ai-toolbar{display:flex;justify-content:center;margin-bottom:20px}.ai-tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
   .ai-tab{display:flex;align-items:center;gap:8px;border:1px solid rgba(100,120,155,.2);background:rgba(130,150,180,.07);color:var(--color-text-secondary);border-radius:20px;padding:6px 14px;font:inherit;font-size:11px;line-height:1.5;cursor:pointer;transition:background .18s,border-color .18s}
   .ai-tab:hover{border-color:var(--color-primary)}.ai-tab.active{background:var(--color-primary);color:#fff;border-color:var(--color-primary)}

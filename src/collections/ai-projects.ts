@@ -1,0 +1,35 @@
+export const skills = [
+  {
+    id: 'livestream', name: '直播场景设计', enName: 'Livestream Scene', command: 'livestream-scene', local: false,
+    repo: 'https://github.com/SJ3199/livestream-scene-skill', release: 'https://github.com/SJ3199/livestream-scene-skill/releases/latest',
+    description: '从参考与产品出发，设计完整的无人直播空间，让品牌、陈列与场景成为一个整体。',
+    enDescription: 'Turn references and products into complete, unoccupied livestream sets, with considered space, staging and brand expression.',
+    features: ['空间规划与产品陈列', '两轮生成与实际看图自检', '图片与同名中文提示词交付'],
+    enFeatures: ['Spatial planning & product staging', 'Two-pass generation & visual review', 'Images with Chinese prompt files'],
+    steps: ['提供参考 / 产品', '规划场景 / 生成自检', '交付图片 / 提示词'],
+    enSteps: ['References & products', 'Plan, generate & review', 'Images & prompt files'],
+    note: '需要支持生图、读图与本地文件的 AI 宿主。以下为历史生成示例。',
+    enNote: 'Requires image generation, image viewing and local file access. Historical outputs shown here.',
+    images: [
+      {src: '/assets/projects/scene-crab.webp', width: 600, height: 1067, alt: '大闸蟹主题直播空间示范', label: '主题场景', enLabel: 'Themed set'},
+      {src: '/assets/projects/scene-fashion.webp', width: 600, height: 1067, alt: '服装陈列直播空间示范', label: '服装陈列', enLabel: 'Fashion staging'},
+      {src: '/assets/projects/scene-handbag.webp', width: 600, height: 1067, alt: '箱包陈列直播空间示范', label: '产品陈列', enLabel: 'Product staging'},
+    ],
+  },
+  {
+    id: 'shiwen', name: '拾纹', enName: 'Texture to Wallpaper', command: 'texture-to-wallpaper', local: true, repo: null, release: null,
+    description: '拾取日常材质的细节，重新组织纹样，制作一套同源的手机与电脑壁纸。',
+    enDescription: 'Explore everyday materials, recompose their patterns and create a coordinated set of phone and desktop wallpapers.',
+    features: ['材质识别与纹样重组', '锁屏、密码页、纯壁纸与电脑壁纸', '风格解析与小红书发布文案'],
+    enFeatures: ['Material analysis & pattern recomposition', 'Lock screen, passcode, phone & desktop', 'Style notes & Xiaohongshu copy'],
+    steps: ['提供照片 / 纹理', '重组纹样 / 制作壁纸', '配套界面 / 发布文案'],
+    enSteps: ['Photos & textures', 'Recompose & create', 'UI previews & social copy'],
+    note: '本地持续迭代中，暂未公开仓库。以下为同一组壁纸的实际输出。',
+    enNote: 'In local development; the repository is not public yet. Actual outputs from one wallpaper set shown here.',
+    images: [
+      {src: '/assets/projects/shiwen-lock.webp', width: 600, height: 1304, alt: '拾纹生成的锁屏画面示范', label: '锁屏画面', enLabel: 'Lock screen'},
+      {src: '/assets/projects/shiwen-passcode.webp', width: 600, height: 1304, alt: '拾纹生成的解锁密码画面示范', label: '密码界面', enLabel: 'Passcode'},
+      {src: '/assets/projects/shiwen-wallpaper.webp', width: 600, height: 1304, alt: '拾纹生成的纯壁纸示范', label: '纯壁纸', enLabel: 'Wallpaper'},
+    ],
+  },
+];
