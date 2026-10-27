@@ -25,8 +25,15 @@ const filteredSocial = displaySocialIds.length > 0
               <img src="/assets/social/douyin-qr.png" alt="抖音二维码" data-i18n-alt="qr-alt-douyin" class="qr-img" />
             </div>
           </div>
+        ) : item.name === "小红书" ? (
+          <button type="button" class="social-item qr-trigger" data-copy={item.username} data-i18n-label="label-xiaohongshu-id" aria-label="小红书" title="小红书" data-i18n-title="social-xiaohongshu">
+            <img src={item.image} alt={item.name} class="social-image" />
+            <span class="qr-popup">
+              <img src="/assets/social/xiaohongshu-qr.jpg" alt="小红书二维码" data-i18n-alt="qr-alt-xiaohongshu" class="qr-img xiaohongshu-qr" width="987" height="1347" loading="lazy" />
+            </span>
+          </button>
         ) : (
-          <a href={item.url} target="_blank" rel="noopener noreferrer" class="social-item">
+          <a href={item.url} target="_blank" rel="noopener noreferrer" class="social-item" aria-label={item.name} title={item.name}>
             <img src={item.image} alt={item.name} class="social-image" />
           </a>
         )}
@@ -110,7 +117,8 @@ const filteredSocial = displaySocialIds.length > 0
   }
   /* Desktop: show on hover */
   @media (hover: hover) and (pointer: fine) {
-    .qr-trigger:hover .qr-popup {
+    .qr-trigger:hover .qr-popup,
+    .qr-trigger:focus-within .qr-popup {
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
@@ -134,6 +142,7 @@ const filteredSocial = displaySocialIds.length > 0
     display: block;
     border-radius: 8px;
   }
+  .xiaohongshu-qr { width: calc(200px * 750 / 920); height: 200px; object-fit: contain; }
 
   /* Toast styles */
   .copy-toast {
@@ -160,29 +169,40 @@ const filteredSocial = displaySocialIds.length > 0
 </style>
 
 <script>
+  function copyWithTextarea(value: string) {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const ta = document.createElement('textarea');
+    ta.value = value;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    let copied = false;
+    try { copied = document.execCommand('copy'); } catch {}
+    ta.remove();
+    previouslyFocused?.focus({ preventScroll: true });
+    return copied;
+  }
+
   document.querySelectorAll('.qr-trigger').forEach((trigger) => {
     const el = trigger as HTMLElement;
     const copyId = el.dataset.copy || '';
     const labelKey = el.dataset.i18nLabel || '';
 
-    // Click → copy to clipboard (both desktop & mobile)
+    // Social QR triggers copy the account ID without navigating away.
     el.addEventListener('click', async (e) => {
       e.preventDefault();
-      try {
-        await navigator.clipboard.writeText(copyId);
-      } catch {
-        const ta = document.createElement('textarea');
-        ta.value = copyId;
-        ta.style.position = 'fixed';
-        ta.style.left = '-9999px';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
+      let copied = false;
+      if (!copied) {
+        try {
+          await navigator.clipboard.writeText(copyId);
+          copied = true;
+        } catch { copied = copyWithTextarea(copyId); }
       }
       const toast = document.getElementById('copy-toast');
       if (toast) {
-        toast.textContent = (window.t ? window.t('toast-copied') : '已复制') + ' ' + (labelKey && window.t ? window.t(labelKey) : 'WeChat') + ': ' + copyId;
+        const message = copied ? (window.t ? window.t('toast-copied') : '已复制') : (window.t ? window.t('toast-copy-failed') : '请手动复制');
+        toast.textContent = message + ' ' + (labelKey && window.t ? window.t(labelKey) : 'ID') + ': ' + copyId;
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 2000);
       }

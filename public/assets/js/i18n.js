@@ -1,6 +1,28 @@
 // i18n translations v2 - Portfolio Site
 const i18n = {
   zh: {
+    'ai-empty-gallery': '暂无图片',
+    "ai-gallery-title": "AI 图集",
+    "ai-home-desc": "AI 场景 · 手机壁纸 · 高清原图下载",
+    "ai-gallery-desc": "AI 生成的场景与手机壁纸，把想象带进你的屏幕。",
+    "ai-light-preview": "轻量预览",
+    "ai-original-download": "高清原图下载",
+    "ai-all": "全部作品",
+    "cat-ai-scenes": "AI 场景",
+    "cat-texture-wallpapers": "手机壁纸",
+    "ai-open-hint": "点开喜欢的画面，选择下载高清原图",
+    "ai-view": "查看作品 ↗",
+    "ai-empty-title": "新的想象，正在准备中",
+    "ai-empty-desc": "首批 AI 场景与手机壁纸即将更新，欢迎稍后再来看看。",
+    "ai-download-note": "浏览时仅加载预览图，原图在点击下载后传输。",
+    "ai-back-works": "返回视觉作品 ↗",
+    "ai-dimensions": "原图尺寸",
+    "ai-format": "原始格式",
+    "ai-file-size": "文件大小",
+    "ai-download-btn": "下载高清原图",
+    "ai-original-note": "下载的是原始文件，尺寸、格式和文件内容保持不变。",
+    "ai-no-original": "这张作品暂未提供原图下载。",
+    "ai-download-started": "已请求高清原图，请在浏览器下载列表中查看保存进度。",
     resume: '简历',
     light: '浅色',
     dark: '深色',
@@ -28,9 +50,12 @@ const i18n = {
     'social-douyin': '抖音',
     'label-wechat-id': '微信号',
     'label-douyin-id': '抖音ID',
+    'label-xiaohongshu-id': '小红书号',
+    'toast-copy-failed': '请手动复制',
     'toast-copied': '已复制',
     'qr-alt-wechat': '微信二维码',
     'qr-alt-douyin': '抖音二维码',
+    'qr-alt-xiaohongshu': '小红书二维码',
     'intro-title': '关于我 ↓',
     'intro-name': '邵将',
     'intro-initial': '邵',
@@ -210,6 +235,28 @@ const i18n = {
     'tool-alert-pack-fail': '打包失败，请逐张下载',
   },
   en: {
+    'ai-empty-gallery': 'No images yet',
+    "ai-gallery-title": "AI Gallery",
+    "ai-home-desc": "AI scenes · Texture wallpapers · Original downloads",
+    "ai-gallery-desc": "AI scenes and phone wallpapers. Bring imagination to your screen.",
+    "ai-light-preview": "Lightweight previews",
+    "ai-original-download": "Original downloads",
+    "ai-all": "All works",
+    "cat-ai-scenes": "AI Scenes",
+    "cat-texture-wallpapers": "Phone Wallpapers",
+    "ai-open-hint": "Open a picture to download its full-resolution original",
+    "ai-view": "View artwork ↗",
+    "ai-empty-title": "New ideas are taking shape",
+    "ai-empty-desc": "AI scenes and phone wallpapers are coming soon. Check back for new work.",
+    "ai-download-note": "Only previews load while browsing. Originals transfer when you click download.",
+    "ai-back-works": "Back to visual works ↗",
+    "ai-dimensions": "Original dimensions",
+    "ai-format": "Original format",
+    "ai-file-size": "File size",
+    "ai-download-btn": "Download original",
+    "ai-original-note": "The original file retains its dimensions, format and content.",
+    "ai-no-original": "An original download is not available for this artwork.",
+    "ai-download-started": "Original requested. Check your browser downloads for progress.",
     resume: 'Resume',
     light: 'Light',
     dark: 'Dark',
@@ -237,9 +284,12 @@ const i18n = {
     'social-douyin': 'Douyin',
     'label-wechat-id': 'WeChat ID',
     'label-douyin-id': 'Douyin ID',
+    'label-xiaohongshu-id': 'Xiaohongshu ID',
+    'toast-copy-failed': 'Please copy manually',
     'toast-copied': 'Copied',
     'qr-alt-wechat': 'WeChat QR Code',
     'qr-alt-douyin': 'Douyin QR Code',
+    'qr-alt-xiaohongshu': 'Xiaohongshu QR Code',
     'intro-title': 'About Me ↓',
     'intro-name': 'MajorSam',
     'intro-initial': 'M',
@@ -439,6 +489,21 @@ function setLang(lang) {
   applyLang(lang);
 }
 
+function updateMenuText() {
+  const lang = getLang();
+  const isMobile = window.innerWidth < 640;
+  document.querySelectorAll('[data-i18n-menu]').forEach(function(el) {
+    const zh = isMobile ? (el.getAttribute('data-i18n-zh-short') || el.getAttribute('data-i18n-zh')) : el.getAttribute('data-i18n-zh');
+    const en = isMobile ? (el.getAttribute('data-i18n-en-short') || el.getAttribute('data-i18n-en')) : el.getAttribute('data-i18n-en');
+    if (zh && en) el.textContent = lang === 'en' ? en : zh;
+  });
+}
+let menuResizeHandler;
+window.addEventListener('resize', function() {
+  clearTimeout(menuResizeHandler);
+  menuResizeHandler = setTimeout(updateMenuText, 100);
+});
+
 function applyLang(lang) {
   const t = i18n[lang] || i18n.zh;
 
@@ -457,25 +522,7 @@ function applyLang(lang) {
     if (t[key]) el.innerHTML = t[key];
   });
 
-  function updateMenuText() {
-    var isMobile = window.innerWidth < 640;
-    document.querySelectorAll('[data-i18n-menu]').forEach(function(el) {
-      var zh = isMobile ? (el.getAttribute('data-i18n-zh-short') || el.getAttribute('data-i18n-zh')) : el.getAttribute('data-i18n-zh');
-      var en = isMobile ? (el.getAttribute('data-i18n-en-short') || el.getAttribute('data-i18n-en')) : el.getAttribute('data-i18n-en');
-      if (zh && en) el.textContent = lang === 'en' ? en : zh;
-    });
-  }
-
-  document.querySelectorAll('[data-i18n-menu]').forEach(function(el) {
-    updateMenuText();
-  });
-
-  // Update menu text on resize
-  var menuResizeHandler = null;
-  window.addEventListener('resize', function() {
-    if (menuResizeHandler) clearTimeout(menuResizeHandler);
-    menuResizeHandler = setTimeout(updateMenuText, 100);
-  });
+  updateMenuText();
 
   document.querySelectorAll('[data-i18n-cat]').forEach(function(el) {
     const catKey = el.getAttribute('data-i18n-cat');

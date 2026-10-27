@@ -14,6 +14,13 @@
 		"url": "/intro"
 	},
 	{
+		"nameZh": "AI图集",
+		"nameZhShort": "图集",
+		"nameEn": "AI Gallery",
+		"nameEnShort": "Gallery",
+		"url": "/ai-gallery"
+	},
+	{
 		"nameZh": "AI项目",
 		"nameZhShort": "AI",
 		"nameEn": "AI Projects",

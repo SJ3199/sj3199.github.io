@@ -7,6 +7,7 @@ import SocialCard from "@/components/cards/SocialCard.astro";
 import AnimatedText from "@/components/ui/AnimatedText.astro";
 import Explore from "@/components/sections/Explore.astro";
 import GallerySection from "@/components/sections/GallerySection.astro";
+import AiGalleryEntry from "@/components/home/AiGalleryEntry.astro";
 ---
 
 <Layout
@@ -59,8 +60,9 @@ keywords="作品集, 设计, 直播设计, 海报, 抖音, 电商设计"
           data-aos-duration="600"
           data-aos-once="true"
         >
-          <SocialCard displaySocialIds={[9, 2]}/>
+          <SocialCard displaySocialIds={[9, 2, 13]}/>
         </div>
+        <AiGalleryEntry />
       </div>
 
       <!-- HeroCard -->

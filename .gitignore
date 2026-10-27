@@ -43,6 +43,9 @@ Thumbs.db
 # wrangler state
 .wrangler/
 
+# Local portfolio manager drafts, originals, build previews and machine settings
+.local-manager/
+
 # R2 upload scripts (contain credential patterns — use .env instead)
 _r2_upload.cjs
 _r2_wrangler.cjs

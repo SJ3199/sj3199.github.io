@@ -1,0 +1,74 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import gallery from '@/collections/gallery.json';
+type Original = {url:string;filename:string;width:number;height:number;bytes:number;mime:string;sha256?:string};
+type AiItem = {id:string|number;image:string;thumbnail?:string;title:string;description?:string;details?:string;category:string;downloadEnabled?:boolean;original?:Original};
+const all = gallery as unknown as AiItem[];
+const items = all.filter(item=>['ai-scenes','texture-wallpapers'].includes(item.category));
+const tabs = [{key:'texture-wallpapers',name:'手机壁纸',i18n:'cat-texture-wallpapers'},{key:'ai-scenes',name:'AI 场景',i18n:'cat-ai-scenes'}];
+const defaultCategory = tabs[0].key;
+const payload = JSON.stringify(items).replaceAll('<','\\u003c');
+---
+<Layout title="AI 图集 · Sam Portfolio" description="AI 生成场景与手机壁纸，支持下载高清原图。" keywords="AI场景,手机壁纸,高清原图,AI图集">
+  <div class="ai-page site-container">
+    <header class="ai-heading">
+      <h1 class="font-sans text-4xl sm:text-5xl font-bold tracking-normal text-center" data-i18n="ai-gallery-title">AI 图集</h1>
+    </header>
+    <div class="ai-toolbar">
+      <div class="ai-tabs" role="group" aria-label="AI 图集分类">{tabs.map((tab,index)=><button type="button" class:list={['ai-tab',{active:index===0}]} data-filter={tab.key} aria-pressed={index===0?'true':'false'}><span data-i18n={tab.i18n}>{tab.name}</span></button>)}</div>
+    </div>
+    <section class="ai-grid" aria-label="AI 作品">{items.map((item,index)=><article class="ai-card" data-category={item.category} hidden={item.category!==defaultCategory}>
+      <button class="ai-card-open" type="button" data-index={index} aria-label={`查看 ${item.title}`}>
+        <div class="ai-card-media"><img src={item.thumbnail||item.image} alt={item.title} loading={index<4?'eager':'lazy'} decoding="async" width="720" height="1280" /><span class="ai-card-hover" data-i18n="ai-view">查看作品 ↗</span></div>
+        <div class="ai-card-copy"><span class="ai-card-category" data-i18n={item.category==='ai-scenes'?'cat-ai-scenes':'cat-texture-wallpapers'}>{item.category==='ai-scenes'?'AI 场景':'手机壁纸'}</span><h2>{item.title}</h2><span class="ai-card-size">{item.original?`${item.original.width} × ${item.original.height} · ${item.original.mime.split('/')[1].toUpperCase()}`:''}</span></div>
+      </button>
+    </article>)}</section>
+    <section class="ai-empty" id="aiEmpty" hidden={items.some(item=>item.category===defaultCategory)}>
+      <p data-i18n="ai-empty-gallery">暂无图片</p>
+    </section>
+  </div>
+  <dialog class="ai-detail" id="aiDetail" aria-labelledby="aiDetailTitle">
+    <div class="ai-detail-top"><span class="ai-detail-category" id="aiDetailCategory"></span><button class="ai-close" id="aiClose" type="button" aria-label="关闭作品详情">×</button></div>
+    <div class="ai-detail-body"><div class="ai-detail-image"><img id="aiDetailImage" alt="" /></div><div class="ai-detail-copy"><h2 id="aiDetailTitle"></h2><p class="ai-description" id="aiDetailDescription"></p><p class="ai-details-text" id="aiDetailText"></p><dl class="ai-file-meta" id="aiFileMeta"><div><dt data-i18n="ai-dimensions">原图尺寸</dt><dd id="aiFileDimensions"></dd></div><div><dt data-i18n="ai-format">原始格式</dt><dd id="aiFileFormat"></dd></div><div><dt data-i18n="ai-file-size">文件大小</dt><dd id="aiFileSize"></dd></div></dl><a class="ai-download" id="aiDownload" rel="noreferrer" hidden><span aria-hidden="true">↓</span><span data-i18n="ai-download-btn">下载高清原图</span></a><p class="ai-download-status" id="aiDownloadStatus" aria-live="polite"></p><p class="ai-original-note" id="aiOriginalNote" data-i18n="ai-original-note">下载的是原始文件，尺寸、格式和文件内容保持不变。</p><p class="ai-original-note" id="aiNoOriginal" data-i18n="ai-no-original" hidden>这张作品暂未提供原图下载。</p></div></div>
+  </dialog>
+  <script is:inline type="application/json" id="aiGalleryData" set:html={payload}></script>
+</Layout>
+<style>
+  :global(html.dark) .ai-page,:global(html.dark) .ai-detail{--color-text-secondary:var(--color-text-secondary-dark);--color-text-tertiary:var(--color-text-tertiary-dark);--color-primary:var(--color-text-primary-dark)}
+  .ai-page{padding-top:20px;padding-bottom:24px;min-height:calc(100svh - 170px)}.ai-heading{text-align:center;margin-bottom:10px}.ai-heading h1{margin:0}.ai-toolbar{display:flex;justify-content:center;margin-bottom:20px}.ai-tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.ai-tab{display:flex;align-items:center;gap:8px;border:1px solid rgba(100,120,155,.2);background:rgba(130,150,180,.07);color:var(--color-text-secondary);border-radius:20px;padding:6px 14px;font:inherit;font-size:11px;line-height:1.5;cursor:pointer;transition:background .18s,border-color .18s}.ai-tab:hover{border-color:var(--color-primary)}.ai-tab.active{background:var(--color-primary);color:#fff;border-color:var(--color-primary)}.ai-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px}.ai-card{min-width:0;border:1px solid rgba(115,135,170,.15);border-radius:15px;overflow:hidden;background:var(--color-bg-secondary);transition:transform .2s,border-color .2s}.ai-card:hover{transform:translateY(-3px);border-color:rgba(56,132,235,.5)}:global(html.dark) .ai-card{background:#0f1b2d}.ai-card-open{display:block;width:100%;border:0;padding:0;background:transparent;color:inherit;text-align:left;cursor:pointer;font:inherit}.ai-card-media{aspect-ratio:9/16;position:relative;background:rgba(120,140,170,.06);overflow:hidden}.ai-card-media img{width:100%;height:100%;object-fit:contain;display:block}.ai-card-hover{position:absolute;bottom:12px;right:12px;opacity:0;transform:translateY(5px);transition:opacity .2s,transform .2s;background:rgba(12,20,35,.78);color:#fff;font-size:11px;padding:8px 12px;border-radius:8px;backdrop-filter:blur(8px)}.ai-card-open:hover .ai-card-hover,.ai-card-open:focus-visible .ai-card-hover{opacity:1;transform:none}.ai-card-copy{padding:14px}.ai-card-category{font-size:9px;color:var(--color-primary);letter-spacing:.06em}.ai-card-copy h2{font-size:14px;font-weight:600;margin:7px 0 5px;line-height:1.5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--color-text-secondary)}.ai-card-size{font-size:10px;color:var(--color-text-tertiary)}.ai-empty{text-align:center;padding:40px 0;color:var(--color-text-tertiary)}.ai-empty p{font-size:12px;line-height:1.9;color:var(--color-text-tertiary);margin:0}.ai-detail{width:min(1180px,calc(100% - 36px));max-height:92vh;padding:0;border:1px solid rgba(110,135,180,.22);border-radius:20px;background:var(--color-bg-secondary);color:var(--color-text-secondary);overflow:auto;box-shadow:0 25px 100px #0005}:global(html.dark) .ai-detail{background:#0e192b}.ai-detail::backdrop{background:#080e1cce;backdrop-filter:blur(8px)}.ai-detail-top{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;z-index:2;background:inherit;border-bottom:1px solid rgba(110,135,180,.12)}.ai-detail-category{color:var(--color-primary);font-size:11px;letter-spacing:.06em}.ai-close{width:32px;height:32px;border:1px solid rgba(110,135,180,.24);border-radius:50%;background:transparent;color:inherit;cursor:pointer;font-size:23px}.ai-detail-body{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr);min-height:450px}.ai-detail-image{background:#070d16;display:flex;align-items:center;justify-content:center;min-width:0;padding:20px}.ai-detail-image img{display:block;max-height:73vh;max-width:100%;object-fit:contain}.ai-detail-copy{padding:38px 28px;display:flex;flex-direction:column;align-items:stretch}.ai-detail-copy h2{font-size:24px;font-weight:600;line-height:1.5;margin:17px 0 15px;overflow-wrap:anywhere}.ai-description,.ai-details-text{font-size:12px;line-height:1.95;color:var(--color-text-tertiary);white-space:pre-wrap;margin:0 0 13px;overflow-wrap:anywhere}.ai-file-meta{border-top:1px solid rgba(110,135,180,.18);padding-top:16px;margin:14px 0 23px;font-size:11px}.ai-file-meta>div{display:flex;justify-content:space-between;gap:14px;margin:0 0 13px}.ai-file-meta dt{color:var(--color-text-tertiary)}.ai-file-meta dd{margin:0;text-align:right}.ai-download{display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 12px;border-radius:10px;background:var(--color-primary);color:white;font-size:13px;font-weight:600;text-decoration:none}.ai-download:hover{background:#2563eb}.ai-download>span:first-child{font-size:20px;line-height:1}.ai-original-note,.ai-download-status{font-size:10px;line-height:1.8;color:var(--color-text-tertiary);margin:12px 0 0}.ai-download-status{color:var(--color-primary)}[hidden]{display:none!important}@media(min-width:640px){.ai-grid{gap:26px 24px}}@media(min-width:1024px){.ai-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(min-width:1280px){.ai-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:767px){.ai-page{padding-top:14px}.ai-toolbar{margin-bottom:16px}.ai-tab{padding:5px 12px}.ai-tabs{gap:7px}.ai-card-copy{padding:11px}.ai-card-copy h2{font-size:12px}.ai-card-size{font-size:9px}.ai-detail{width:calc(100% - 20px);border-radius:14px}.ai-detail-body{grid-template-columns:minmax(0,1fr)}.ai-detail-image{padding:12px}.ai-detail-image img{max-height:52vh}.ai-detail-copy{padding:24px 20px}.ai-detail-copy h2{font-size:21px}}@media(prefers-reduced-motion:reduce){.ai-card,.ai-tab,.ai-card-hover{transition:none;transform:none}}
+</style>
+<script>
+  type Original = {url:string;filename:string;width:number;height:number;bytes:number;mime:string};
+  type Item = {image:string;title:string;description?:string;details?:string;category:string;downloadEnabled?:boolean;original?:Original};
+  const items:Item[]=JSON.parse(document.getElementById('aiGalleryData')?.textContent||'[]');
+  const dialog=document.getElementById('aiDetail') as HTMLDialogElement;
+  const image=document.getElementById('aiDetailImage') as HTMLImageElement;
+  const download=document.getElementById('aiDownload') as HTMLAnchorElement;
+  const text=(id:string,value:string)=>{document.getElementById(id)!.textContent=value;};
+  const tr=(key:string,fallback:string)=>((window as any).t?.(key)||fallback);
+  const categoryName=(cat:string)=>cat==='ai-scenes'?tr('cat-ai-scenes','AI 场景'):tr('cat-texture-wallpapers','手机壁纸');
+  let current:Item|undefined;
+  function open(index:number){
+    const item=items[index];if(!item)return;current=item;
+    image.src=item.image;image.alt=item.title;
+    text('aiDetailTitle',item.title);text('aiDetailCategory',categoryName(item.category));text('aiDetailDescription',item.description||'');text('aiDetailText',item.details||'');text('aiDownloadStatus','');
+    const original=item.original;const allowed=!!original?.url&&item.downloadEnabled!==false;
+    document.getElementById('aiFileMeta')!.hidden=!original;
+    if(original){text('aiFileDimensions',`${original.width} × ${original.height} px`);text('aiFileFormat',original.mime.split('/')[1]?.toUpperCase()||'');text('aiFileSize',`${(original.bytes/1048576).toFixed(2)} MB`);}
+    download.hidden=!allowed;document.getElementById('aiNoOriginal')!.hidden=allowed;document.getElementById('aiOriginalNote')!.hidden=!allowed;
+    if(allowed&&original){download.href=original.url;download.download=original.filename;}else download.removeAttribute('href');
+    dialog.showModal();document.body.style.overflow='hidden';
+  }
+  document.querySelectorAll<HTMLButtonElement>('.ai-card-open').forEach(button=>button.addEventListener('click',()=>open(Number(button.dataset.index))));
+  document.querySelectorAll<HTMLButtonElement>('.ai-tab').forEach(button=>button.addEventListener('click',()=>{
+    const category=button.dataset.filter;let count=0;
+    document.querySelectorAll<HTMLButtonElement>('.ai-tab').forEach(tab=>{tab.classList.toggle('active',tab===button);tab.setAttribute('aria-pressed',String(tab===button));});
+    document.querySelectorAll<HTMLElement>('.ai-card').forEach(card=>{card.hidden=card.dataset.category!==category;if(!card.hidden)count++;});
+    document.getElementById('aiEmpty')!.hidden=count>0;
+  }));
+  document.getElementById('aiClose')?.addEventListener('click',()=>dialog.close());
+  dialog.addEventListener('close',()=>{document.body.style.overflow='';image.removeAttribute('src');current=undefined;});
+  dialog.addEventListener('click',event=>{if(event.target!==dialog)return;const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();});
+  download.addEventListener('click',()=>text('aiDownloadStatus',tr('ai-download-started','已请求高清原图，请在浏览器下载列表中查看保存进度。')));
+  window.addEventListener('langchange',()=>{if(current)text('aiDetailCategory',categoryName(current.category));});
+</script>

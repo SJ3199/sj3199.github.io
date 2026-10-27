@@ -14,6 +14,13 @@
     "url": "#douyin"
   },
   {
+    "id": 13,
+    "name": "小红书",
+    "username": "754920819",
+    "image": "/assets/social/social-xiaohongshu.png",
+    "url": ""
+  },
+  {
     "id": 12,
     "name": "Facebook",
     "isShow": false,
