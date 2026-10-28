@@ -1,5 +1,560 @@
 [
   {
+    "id": "work-28af1344-9ffd-41fd-a95a-b14dfbd01a0c",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/28af1344-9ffd-41fd-a95a-b14dfbd01a0c.webp",
+    "title": "焦糖羊羔圈绒",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/b8b4ae6a-c936-4128-bf51-f075d2ca016b.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/b8b4ae6a-c936-4128-bf51-f075d2ca016b.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/993b46dc-f40a-479a-8038-fe2a00bb56bf.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/993b46dc-f40a-479a-8038-fe2a00bb56bf.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/28af1344-9ffd-41fd-a95a-b14dfbd01a0c.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/28af1344-9ffd-41fd-a95a-b14dfbd01a0c.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 1705992,
+      "mime": "image/jpeg",
+      "sha256": "6cd3a81069c9bff549244c45c92c8b22de212657c76735bf41e945378e15dbb5"
+    }
+  },
+  {
+    "id": "work-7d731b5d-cacb-4474-91a8-0efb2f261586",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/7d731b5d-cacb-4474-91a8-0efb2f261586.webp",
+    "title": "深巧白点鹿纹",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/6e069453-4f24-4729-879f-dde363f9dd16.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/6e069453-4f24-4729-879f-dde363f9dd16.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/24c789f3-23b8-42ec-9a0a-05e65a98de92.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/24c789f3-23b8-42ec-9a0a-05e65a98de92.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/7d731b5d-cacb-4474-91a8-0efb2f261586.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/7d731b5d-cacb-4474-91a8-0efb2f261586.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 1419532,
+      "mime": "image/jpeg",
+      "sha256": "2b0b21ed4b500d8875ae59efb58c3b712b94074f7fb18995124d200a56a9f41e"
+    }
+  },
+  {
+    "id": "work-cdb7e173-b198-4c09-8679-9873865c9892",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/cdb7e173-b198-4c09-8679-9873865c9892.webp",
+    "title": "奶油浅咖豹纹印花",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/5a6f10de-1dd4-47b9-b520-954944afb366.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/5a6f10de-1dd4-47b9-b520-954944afb366.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/6ec16078-a80d-4353-b876-feb7c28bc954.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/6ec16078-a80d-4353-b876-feb7c28bc954.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/cdb7e173-b198-4c09-8679-9873865c9892.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/cdb7e173-b198-4c09-8679-9873865c9892.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 1014293,
+      "mime": "image/jpeg",
+      "sha256": "6080e782362ad0b692e89dd108ce1d91c67d36a4abd4c73ce736c0f93f3c132e"
+    }
+  },
+  {
+    "id": "work-9d36daf2-2c5f-42cd-aa55-b9d96292238c",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/9d36daf2-2c5f-42cd-aa55-b9d96292238c.webp",
+    "title": "银白细带虎纹",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/374acc39-2030-4b9a-98d3-a0bf12394c03.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/374acc39-2030-4b9a-98d3-a0bf12394c03.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/8caf33e8-b824-4f6d-a94e-e5496ad20968.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/8caf33e8-b824-4f6d-a94e-e5496ad20968.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/9d36daf2-2c5f-42cd-aa55-b9d96292238c.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/9d36daf2-2c5f-42cd-aa55-b9d96292238c.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 1624515,
+      "mime": "image/jpeg",
+      "sha256": "03e22582fe5dc15223cf1d41196dc9649ccf1659d425e7b7f9738ce6aeccff37"
+    }
+  },
+  {
+    "id": "work-8df62195-b8fb-4b17-a2b8-2274026e71f0",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/8df62195-b8fb-4b17-a2b8-2274026e71f0.webp",
+    "title": "黑白锯齿斑马纹",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/e0f82c5b-64b3-4742-b430-2affab066c5d.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/e0f82c5b-64b3-4742-b430-2affab066c5d.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/906896fe-c601-48e9-ac3a-ae7331b201ff.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/906896fe-c601-48e9-ac3a-ae7331b201ff.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/8df62195-b8fb-4b17-a2b8-2274026e71f0.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/8df62195-b8fb-4b17-a2b8-2274026e71f0.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 1412900,
+      "mime": "image/jpeg",
+      "sha256": "fadfb728543ede4641062111957357a4000c129ae048ba18504fb95f2c0986ca"
+    }
+  },
+  {
+    "id": "work-c3aa8cfd-a114-4e4e-895d-3a49789d125f",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/c3aa8cfd-a114-4e4e-895d-3a49789d125f.webp",
+    "title": "云白层叠绒毛",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/983ebade-3add-44c0-88aa-577160e3ff30.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/983ebade-3add-44c0-88aa-577160e3ff30.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/02b55060-2a03-494b-90f2-f8e4bbff4a91.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/02b55060-2a03-494b-90f2-f8e4bbff4a91.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/c3aa8cfd-a114-4e4e-895d-3a49789d125f.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/c3aa8cfd-a114-4e4e-895d-3a49789d125f.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 1311395,
+      "mime": "image/jpeg",
+      "sha256": "20a8474097b8ffaa7fba5cc056bc1ead8286c921aefde504328c447a27d96074"
+    }
+  },
+  {
+    "id": "work-a9551a92-f4c3-4eef-be94-40ae045090fa",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/a9551a92-f4c3-4eef-be94-40ae045090fa.webp",
+    "title": "象牙灰纹长绒",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/f27e1583-a6bb-4ba6-9a42-cd794004cf2c.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/f27e1583-a6bb-4ba6-9a42-cd794004cf2c.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/794b1a7f-2c26-439f-8a7d-13c7599a743e.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/794b1a7f-2c26-439f-8a7d-13c7599a743e.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/a9551a92-f4c3-4eef-be94-40ae045090fa.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/a9551a92-f4c3-4eef-be94-40ae045090fa.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 1414409,
+      "mime": "image/jpeg",
+      "sha256": "e4f942bacdac8544cb7348e1890b797aea4213010ca8531295cc2009a6cbdc3a"
+    }
+  },
+  {
+    "id": "work-542e25b8-8e66-4d10-9c43-656441f2de02",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/542e25b8-8e66-4d10-9c43-656441f2de02.webp",
+    "title": "银灰密斑豹纹",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/d3478147-2974-4970-a809-e8ea23535365.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/d3478147-2974-4970-a809-e8ea23535365.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/b78240a3-aeed-46ca-b212-51e73c3f2b8c.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/b78240a3-aeed-46ca-b212-51e73c3f2b8c.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/542e25b8-8e66-4d10-9c43-656441f2de02.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/542e25b8-8e66-4d10-9c43-656441f2de02.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 1219307,
+      "mime": "image/jpeg",
+      "sha256": "e770ea65bcfdf33f88a99e7b6ab96d64d7857ec2044fb5da80667391a621cd87"
+    }
+  },
+  {
+    "id": "work-9757ba4e-4335-47c4-941c-0d21742c7a00",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/9757ba4e-4335-47c4-941c-0d21742c7a00.webp",
+    "title": "雪白细黑纹长绒",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/11795dff-3dda-483e-8bfe-11f8d9069654.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/11795dff-3dda-483e-8bfe-11f8d9069654.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/e4fe9ac9-bee4-4f00-bb5e-a7e84a200018.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/e4fe9ac9-bee4-4f00-bb5e-a7e84a200018.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/9757ba4e-4335-47c4-941c-0d21742c7a00.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/9757ba4e-4335-47c4-941c-0d21742c7a00.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 1353189,
+      "mime": "image/jpeg",
+      "sha256": "4f496f7d764e86c80aad1f9107135e0d2c637ac60fa584ac1edd0fcc58d35ce7"
+    }
+  },
+  {
+    "id": "work-29a2582a-c7fb-413a-a517-85c333395b25",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/29a2582a-c7fb-413a-a517-85c333395b25.webp",
+    "title": "雪白黑斑豹纹",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/4898491d-4c1e-4116-ac2f-ff759edda2dc.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/4898491d-4c1e-4116-ac2f-ff759edda2dc.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/e999b935-07fe-4ac0-93d0-da1480bd88c8.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/e999b935-07fe-4ac0-93d0-da1480bd88c8.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/29a2582a-c7fb-413a-a517-85c333395b25.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/29a2582a-c7fb-413a-a517-85c333395b25.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 1233321,
+      "mime": "image/jpeg",
+      "sha256": "b0b2d9629c137cb312d4c7ce744dc10ff749340aefde719318d29e92d8c7a614"
+    }
+  },
+  {
+    "id": "work-ca7d5e87-1f53-4a2f-9034-6fe94b974f25",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/ca7d5e87-1f53-4a2f-9034-6fe94b974f25.webp",
+    "title": "金棕宽带虎纹",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/c7b29cbb-8839-4c4c-850a-0de058c37440.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/c7b29cbb-8839-4c4c-850a-0de058c37440.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/c5d6c6f5-0a58-40ce-9158-529f15bddc15.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/c5d6c6f5-0a58-40ce-9158-529f15bddc15.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/ca7d5e87-1f53-4a2f-9034-6fe94b974f25.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/ca7d5e87-1f53-4a2f-9034-6fe94b974f25.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 2202179,
+      "mime": "image/jpeg",
+      "sha256": "e443ea2731944fb725910575e9aaa1df607c0b6a37bedac7f662bf2545e03563"
+    }
+  },
+  {
+    "id": "work-f63b3aa4-c389-40a5-b107-f885137b240c",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/f63b3aa4-c389-40a5-b107-f885137b240c.webp",
+    "title": "麦金细线虎纹",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/0056780a-56f1-4249-9cbb-0b2054a15d15.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/0056780a-56f1-4249-9cbb-0b2054a15d15.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/bf0ff6ed-596c-4f66-bed7-4a3ef2389d3c.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/bf0ff6ed-596c-4f66-bed7-4a3ef2389d3c.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/f63b3aa4-c389-40a5-b107-f885137b240c.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/f63b3aa4-c389-40a5-b107-f885137b240c.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 1983151,
+      "mime": "image/jpeg",
+      "sha256": "f2f62fdfc9451eac966df2a5cbff8a332bcd5b40b026377f7e9e01b1255c0d3e"
+    }
+  },
+  {
+    "id": "work-af4f4713-5cd0-4686-b479-60a1ccaeff37",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/af4f4713-5cd0-4686-b479-60a1ccaeff37.webp",
+    "title": "深暖棕人字虎纹",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/1f697b3d-0b39-4503-bc82-849ce0df0240.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/1f697b3d-0b39-4503-bc82-849ce0df0240.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/1b65c896-3ca9-45fe-800b-d43b69027f45.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/1b65c896-3ca9-45fe-800b-d43b69027f45.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/af4f4713-5cd0-4686-b479-60a1ccaeff37.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/af4f4713-5cd0-4686-b479-60a1ccaeff37.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 1715061,
+      "mime": "image/jpeg",
+      "sha256": "53e13aba2c1678c00debf15a743e7e8cdf54e479ae0eadde9014a444855e7191"
+    }
+  },
+  {
+    "id": "work-a4f83577-fbd0-4727-9ba7-8766ba3a8964",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/a4f83577-fbd0-4727-9ba7-8766ba3a8964.webp",
+    "title": "亮金橘虎纹",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/094d6cf5-5897-4002-a12a-87700040bbe2.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/094d6cf5-5897-4002-a12a-87700040bbe2.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/68274f70-64b3-4db5-a535-233f737633ee.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/68274f70-64b3-4db5-a535-233f737633ee.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/a4f83577-fbd0-4727-9ba7-8766ba3a8964.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/a4f83577-fbd0-4727-9ba7-8766ba3a8964.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 2082624,
+      "mime": "image/jpeg",
+      "sha256": "937c7eb1b361681d7384560a924a672c92387cbc09db5f703daa2e45cb900c84"
+    }
+  },
+  {
+    "id": "work-c0f704a7-65fa-42da-a35e-49f6c5aff21b",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/c0f704a7-65fa-42da-a35e-49f6c5aff21b.webp",
+    "title": "棕金复合动物印花",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "wallpaper": {
+      "width": 1320,
+      "height": 2868,
+      "lock": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/758e9e65-b9d3-4950-8dbf-e087413d79d4.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/758e9e65-b9d3-4950-8dbf-e087413d79d4.webp",
+        "width": 1320,
+        "height": 2868
+      },
+      "passcode": {
+        "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/027c80f2-0914-4e08-9581-813a6f24b86e.webp",
+        "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/027c80f2-0914-4e08-9581-813a6f24b86e.webp",
+        "width": 1320,
+        "height": 2868
+      }
+    },
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/c0f704a7-65fa-42da-a35e-49f6c5aff21b.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/c0f704a7-65fa-42da-a35e-49f6c5aff21b.jpg",
+      "filename": "03-phone-wallpaper-1320x2868.jpg",
+      "width": 1320,
+      "height": 2868,
+      "bytes": 1879863,
+      "mime": "image/jpeg",
+      "sha256": "2fd9c8a4affbb38c098dc9e29737d1416b8ccb0d4c5d671b487fa7dee805312a"
+    }
+  },
+  {
     "id": "work-e3510fd1-0a27-47f5-a86d-f9fce40a8554",
     "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/e3510fd1-0a27-47f5-a86d-f9fce40a8554.webp",
     "title": "灰棕黑斑豹纹",
