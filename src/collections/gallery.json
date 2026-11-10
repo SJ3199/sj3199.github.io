@@ -1,5 +1,47 @@
 [
   {
+    "id": "work-3bf1b70b-33ce-4c12-8867-66320514f831",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/3bf1b70b-33ce-4c12-8867-66320514f831.webp",
+    "title": "Christmas-Red-1440x2560 (1)",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/3bf1b70b-33ce-4c12-8867-66320514f831.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/3bf1b70b-33ce-4c12-8867-66320514f831.png",
+      "filename": "Christmas-Red-1440x2560 (1).png",
+      "width": 1440,
+      "height": 2560,
+      "bytes": 4112813,
+      "mime": "image/png",
+      "sha256": "2f2b5561b8204eb7d3eaa11365abea280d436905b29c1ff0d269d8e07fd2f6cd"
+    }
+  },
+  {
+    "id": "work-fe07928d-91c0-4f27-b515-855e34ee913a",
+    "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/fe07928d-91c0-4f27-b515-855e34ee913a.webp",
+    "title": "Christmas-Green-1440x2560 (1)",
+    "description": "",
+    "details": "",
+    "category": "texture-wallpapers",
+    "categoryName": "手机壁纸",
+    "categoryNameEn": "Phone Wallpapers",
+    "downloadEnabled": true,
+    "thumbnail": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/thumbnails/fe07928d-91c0-4f27-b515-855e34ee913a.webp",
+    "original": {
+      "url": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/media/ai/originals/fe07928d-91c0-4f27-b515-855e34ee913a.png",
+      "filename": "Christmas-Green-1440x2560 (1).png",
+      "width": 1440,
+      "height": 2560,
+      "bytes": 2244700,
+      "mime": "image/png",
+      "sha256": "b1a7bfb5922516bd71c3d9db85992c9f2a83e9a825a9c7f8789f78662f826588"
+    }
+  },
+  {
     "id": "work-876fa357-6352-4221-a7d6-f454faf8a85a",
     "image": "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/portfolio/876fa357-6352-4221-a7d6-f454faf8a85a.webp",
     "title": "烟棕密斑",
