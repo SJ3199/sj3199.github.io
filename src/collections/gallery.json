@@ -2083,7 +2083,9 @@
     "category": "detail-pages",
     "categoryName": "长图",
     "categoryNameEn": "Detail Pages",
-    "details": ""
+    "details": "",
+    "width": 593,
+    "height": 8828
   },
   {
     "id": "2",
@@ -2093,7 +2095,9 @@
     "category": "detail-pages",
     "categoryName": "长图",
     "categoryNameEn": "Detail Pages",
-    "details": ""
+    "details": "",
+    "width": 563,
+    "height": 2050
   },
   {
     "id": "3",
@@ -2103,7 +2107,9 @@
     "category": "detail-pages",
     "categoryName": "长图",
     "categoryNameEn": "Detail Pages",
-    "details": ""
+    "details": "",
+    "width": 750,
+    "height": 2421
   },
   {
     "id": "4",
@@ -2113,7 +2119,9 @@
     "category": "detail-pages",
     "categoryName": "长图",
     "categoryNameEn": "Detail Pages",
-    "details": ""
+    "details": "",
+    "width": 500,
+    "height": 5975
   },
   {
     "id": "5",
@@ -2123,7 +2131,9 @@
     "category": "detail-pages",
     "categoryName": "长图",
     "categoryNameEn": "Detail Pages",
-    "details": ""
+    "details": "",
+    "width": 563,
+    "height": 9475
   },
   {
     "id": "6",
@@ -2133,7 +2143,9 @@
     "category": "detail-pages",
     "categoryName": "长图",
     "categoryNameEn": "Detail Pages",
-    "details": ""
+    "details": "",
+    "width": 500,
+    "height": 4500
   },
   {
     "id": "7",
@@ -2143,7 +2155,9 @@
     "category": "detail-pages",
     "categoryName": "长图",
     "categoryNameEn": "Detail Pages",
-    "details": ""
+    "details": "",
+    "width": 633,
+    "height": 3590
   },
   {
     "id": "8",
@@ -2153,7 +2167,9 @@
     "category": "detail-pages",
     "categoryName": "长图",
     "categoryNameEn": "Detail Pages",
-    "details": ""
+    "details": "",
+    "width": 844,
+    "height": 4308
   },
   {
     "id": "9",
@@ -2163,7 +2179,9 @@
     "category": "detail-pages",
     "categoryName": "长图",
     "categoryNameEn": "Detail Pages",
-    "details": ""
+    "details": "",
+    "width": 633,
+    "height": 5429
   },
   {
     "id": "1",

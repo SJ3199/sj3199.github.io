@@ -3,13 +3,13 @@ import galleryItems from "@/collections/gallery.json";
 import SectionHeader from "@/components/elements/SectionHeader.astro";
 
 const categoryMap: Record<string, string> = {
-  "live-stream": "直播画面",
-  "posters": "海报设计",
-  "detail-pages": "长图",
-  "material-design": "物料设计",
-  "brand-design": "品牌设计",
-  "douyin-store": "抖音店铺",
-  "douyin-products": "抖音产品图",
+  "live-stream": "直播",
+  "posters": "海报",
+  "material-design": "物料",
+  "brand-design": "品牌",
+  "douyin-store": "店铺",
+  "douyin-products": "货盘图",
+  "detail-pages": "详情",
 };
 
 const categories = Object.keys(categoryMap);
@@ -66,10 +66,12 @@ const uniquePreload = [...new Set(preloadImages)];
     <div id="galleryContainer">
       {categories.filter(cat => cat !== 'brand-design').map((cat) => {
         const items = itemsByCategory[cat] || [];
+        const groups = cat === 'posters' ? [items.slice(0, 2), items.slice(2)] : [items];
         return (
           <div class="gallery-category" data-cat={cat} id={`cat-${cat}`}>
-            <div class="gallery-grid">
-              {items.map((item, idx) => {
+            {groups.map((group, groupIndex) => (
+            <div class:list={['gallery-grid', { 'poster-featured-grid': cat === 'posters' && groupIndex === 0 }]}>
+              {group.map((item, idx) => {
                 const imgSrc = item.image;
                 // Prioritize the complete first row at each category's widest layout.
                 const isPrioritized = idx < 4;
@@ -84,8 +86,8 @@ const uniquePreload = [...new Set(preloadImages)];
                       src={imgSrc}
                       alt={item.title}
                       class="w-full h-auto block"
-                      width="600"
-                      height="400"
+                      width={item.width || 600}
+                      height={item.height || 400}
                       loading={isPrioritized ? "eager" : "lazy"}
                       decoding={isPrioritized ? "sync" : "async"}
                       fetchpriority={isPrioritized ? "high" : "auto"}
@@ -95,6 +97,7 @@ const uniquePreload = [...new Set(preloadImages)];
                 );
               })}
             </div>
+            ))}
           </div>
         );
       })}
@@ -180,16 +183,35 @@ const uniquePreload = [...new Set(preloadImages)];
     .gallery-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   }
 
-  /* Explicit grid columns stay occupied even when one image is exceptionally tall. */
+  /* The two landscape posters get their own full-width row above the portrait grid. */
+  .poster-featured-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 0.75rem;
+  }
+  @media (min-width: 640px) {
+    .poster-featured-grid { margin-bottom: 1.5rem; }
+  }
+
+  /* Each column uses normal document flow: image loading cannot overlap its neighbours. */
   #cat-detail-pages .gallery-grid {
-    grid-auto-rows: 1px;
-    grid-auto-flow: dense;
-    row-gap: 0;
+    --masonry-columns: 2;
+    align-items: start;
+  }
+  #cat-detail-pages .gallery-grid > :global([data-masonry-column]) {
+    display: flex;
+    flex-direction: column;
+    gap: inherit;
+    min-width: 0;
   }
   #cat-detail-pages .gallery-item {
     min-width: 0;
-    align-self: start;
-    grid-row-end: span var(--masonry-row-span, 1);
+    animation: none;
+  }
+  @media (min-width: 1024px) {
+    #cat-detail-pages .gallery-grid { --masonry-columns: 3; }
+  }
+  @media (min-width: 1280px) {
+    #cat-detail-pages .gallery-grid { --masonry-columns: 4; }
   }
 
   .gallery-item {
@@ -217,20 +239,36 @@ const uniquePreload = [...new Set(preloadImages)];
     if (initialCat) initialCat.classList.add('active');
 
     const longGrid = document.querySelector<HTMLElement>('#cat-detail-pages .gallery-grid');
+    const longItems = longGrid ? Array.from(longGrid.querySelectorAll<HTMLElement>('.gallery-item')) : [];
+    let longColumnCount = 0;
     function layoutLongImages() {
-      if (!longGrid || !longGrid.offsetWidth) return;
-      const gap = parseFloat(getComputedStyle(longGrid).columnGap) || 0;
-      longGrid.querySelectorAll<HTMLElement>('.gallery-item').forEach(item => {
-        const media = item.querySelector<HTMLElement>('.gallery-img-wrap');
-        if (!media) return;
-        item.style.setProperty('--masonry-row-span', String(Math.ceil(media.getBoundingClientRect().height + gap)));
+      if (!longGrid) return;
+      const count = parseInt(getComputedStyle(longGrid).getPropertyValue('--masonry-columns'), 10) || 2;
+      if (count === longColumnCount) return;
+      const columns = Array.from({ length: count }, () => {
+        const column = document.createElement('div');
+        column.dataset.masonryColumn = '';
+        return column;
       });
+      // Use intrinsic proportions to balance columns without measuring rendered heights.
+      // Actual vertical spacing is always controlled by normal flow and flex gap.
+      const heights = Array<number>(count).fill(0);
+      longItems.forEach(item => {
+        const columnIndex = heights.indexOf(Math.min(...heights));
+        columns[columnIndex].appendChild(item);
+        const img = item.querySelector('img');
+        const width = Number(img?.getAttribute('width')) || 600;
+        const height = Number(img?.getAttribute('height')) || 400;
+        heights[columnIndex] += height / width;
+      });
+      longGrid.replaceChildren(...columns);
+      longColumnCount = count;
     }
     if (longGrid) {
-      // Recalculate after loading, resizing, or revealing the hidden category.
+      layoutLongImages();
       const longImageObserver = new ResizeObserver(layoutLongImages);
-      longGrid.querySelectorAll<HTMLElement>('.gallery-img-wrap').forEach(media => longImageObserver.observe(media));
-      longGrid.querySelectorAll('img').forEach(img => img.addEventListener('load', layoutLongImages));
+      longImageObserver.observe(longGrid);
+      window.addEventListener('resize', layoutLongImages);
     }
 
     function applyFilter(filter) {
